@@ -28,6 +28,50 @@
 .form-input {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    
+    margin: 40px 0;
+}
+
+.email-input-field {
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.email-input-field:focus {
+    border: 2px solid #427fed;
+}
+
+.form-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-message {
+    padding-top: 5px;
+    color: #cc0000;
+    font-size: 14px;
+}
+
+.next-btn {
+    background-color: #427fed;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+
+.next-btn:hover {
+    background-color: #3175f4;
+}
+
+.demo-btn {
+    color: #427fed;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.signup-link {
+    color: #427fed;
+    font-weight: 600;
+    padding-top: 10px;
 }
