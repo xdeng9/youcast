@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { demoUser } from '../../util/session/demo_user';
 
-class Form extends React.Component {
+class LoginForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,11 +13,17 @@ class Form extends React.Component {
             validEmail: null 
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.demoLogin = this.demoLogin.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.action(this.state).then(() => this.props.history.push('/'));
+    }
+
+    demoLogin(e) {
+        e.preventDefault();
+        this.props.action(demoUser).then(() => this.props.history.push('/'))
     }
 
     handleUpdate(type) {
@@ -60,9 +67,9 @@ class Form extends React.Component {
                         value={this.state.email}
                         onChange={this.handleUpdate('email')}
                     /> 
-                    {/* {this.renderError()} */}
+                    {this.props.errors[0] === 'Invalid email or password' ? this.renderError() : null}
                 </div>
-                <button className="demo-btn">Login as a Demo User</button>
+                <button className="demo-btn" onClick={this.demoLogin}>Login as a Demo User</button>
                 <div className="form-bottom">
                     <Link className="signup-link" to="/signup">Create account</Link>
                     <button className="next-btn" input="submit">Next</button>
@@ -77,4 +84,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default LoginForm;

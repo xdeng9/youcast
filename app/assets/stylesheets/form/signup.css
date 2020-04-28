@@ -1,0 +1,29 @@
+.form-wrapper-signup {
+    color:#202124;
+    font-family: roboto, 'Noto Sans Myanmar UI',arial,sans-serif;;
+    margin: 250px auto;
+    height: 520px;
+    width: 370px;
+    padding: 48px 40px 36px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.form-input-field {
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.form-input-field:focus {
+    border: 2px solid #427fed;
+}
+
+.password {
+    margin-top: 20px;
+}
+
+.email {
+    margin-top: 20px;
+}
