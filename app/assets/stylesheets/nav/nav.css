@@ -1,0 +1,11 @@
+.nav-bar {
+    display: flex;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 23px;
+    width: 90px;
+}
