@@ -15,3 +15,10 @@
     width: 130px;
     justify-content: space-between;
 }
+
+.nav-right {
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -145,8 +145,8 @@ var signup = function signup(formUser) {
   return function (dispatch) {
     return _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signUp"](formUser).then(function (user) {
       return dispatch(receiveUser(user));
-    }, function (error) {
-      return dispatch(receiveErrors(error.responseJSON));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors));
     });
   };
 };
@@ -154,8 +154,8 @@ var login = function login(formUser) {
   return function (dispatch) {
     return _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logIn"](formUser).then(function (user) {
       return dispatch(receiveUser(user));
-    }, function (error) {
-      return dispatch(receiveErrors(error.responseJSON));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors));
     });
   };
 };
@@ -163,6 +163,8 @@ var logout = function logout() {
   return function (dispatch) {
     return _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logOut"]().then(function () {
       return dispatch(logoutUser());
+    }, function (errors) {
+      return dispatch(receiveErrors(errors));
     });
   };
 };
@@ -410,13 +412,18 @@ var Nav = /*#__PURE__*/function (_Component) {
         src: window.youcastLogo,
         alt: "logo"
       }))));
-      var rightDisplay = this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      var authDisplay = this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this.props.logout();
         }
-      }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], _defineProperty({
+      }, "Logout") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], _defineProperty({
         to: "/login"
-      }, "to", "login"), "SIGN IN")));
+      }, "to", "login"), "SIGN IN"));
+      var rightDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "nav-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-video-plus"
+      })), authDisplay);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-bar"
       }, leftDisplay, rightDisplay);

@@ -15,17 +15,18 @@ class Nav extends Component {
             </div>
         )
 
-        const rightDisplay = this.props.currentUser ? (
-            <div>
-                <button onClick={() => this.props.logout()}>Logout</button>
-            </div>
+        const authDisplay = this.props.currentUser ? (
+           <button onClick={() => this.props.logout()}>Logout</button>
+            
             ) : (
-                <div>
-                    <p>
-                        <Link to="/login" to="login">SIGN IN</Link>
-                    </p>
-                </div>
+                    <p><Link to="/login" to="login">SIGN IN</Link></p>
             )
+
+        const rightDisplay = (
+            <div className="nav-right">
+                <button><i className="fas fa-video-plus"></i></button>
+                {authDisplay}
+            </div>)
 
         return (
             <div className="nav-bar">
