@@ -1,5 +1,6 @@
 /.bundle
-
+/public/assets
+bundle.js*
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -11,6 +12,7 @@
 
 .byebug_history
 .DS_Store
+npm-debug.log
 
 # Ignore application configuration
 /config/application.yml
