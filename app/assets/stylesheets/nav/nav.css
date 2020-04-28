@@ -9,3 +9,7 @@
     height: 23px;
     width: 90px;
 }
+
+.menu {
+    display: flex;
+}

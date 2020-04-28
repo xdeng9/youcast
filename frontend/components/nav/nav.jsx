@@ -5,8 +5,11 @@ class Nav extends Component {
 
     render() {
         const leftDisplay = (
-            <div className="logo">
-                <img src={window.youcastLogo} alt="logo" />
+            <div className="menu">
+                    <button className="hamburger"><i class="fas fa-bars"></i></button>
+                    <div className="logo">
+                        <img src={window.youcastLogo} alt="logo" />
+                    </div>
             </div>
         )
 
@@ -14,7 +17,7 @@ class Nav extends Component {
             <div>
                 <button onClick={() => this.props.logout()}>Logout</button>
             </div>
-        ) : (
+            ) : (
                 <div>
                     <p>
                         <Link to="/login" to="login">SIGN IN</Link>
