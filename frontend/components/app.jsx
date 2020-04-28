@@ -1,8 +1,12 @@
 import React from 'react';
+import NavContainer from './nav/nav_container';
 
 const App = () => {
     return (
-        <div>Hello from App!</div>
+        <div>
+            <h1>Welcome to YouCast</h1>
+            <NavContainer />
+        </div>
     )
 }
 

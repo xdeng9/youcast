@@ -3,17 +3,24 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 
 import configureStore from './store/store';
-import { signup, login, logout } from './actions/session';
 
 import { receiveUser } from './actions/session';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const store = configureStore();
-
-    window.signup = signup;
-    window.login = login;
-    window.logout = logout;
+    let store;
+    if (window.currentUser) {
+        const preloadedState = {
+            entities: {
+                users: { [window.currentUser.id]: window.currentUser }
+            },
+            session: { id: window.currentUser.id }
+        };
+        store = configureStore(preloadedState);
+        delete window.currentUser;
+    } else {
+        store = configureStore();
+    }
 
     window.receiveUser = receiveUser;
     window.store = store;
