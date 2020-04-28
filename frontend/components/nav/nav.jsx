@@ -5,11 +5,13 @@ class Nav extends Component {
 
     render() {
         const leftDisplay = (
-            <div className="menu">
-                    <button className="hamburger"><i class="fas fa-bars"></i></button>
-                    <div className="logo">
+            <div className="nav-left">
+                <button><i className="far fa-bars"></i></button>
+                <div className="logo">
+                    <Link to="/">
                         <img src={window.youcastLogo} alt="logo" />
-                    </div>
+                    </Link>
+                </div>
             </div>
         )
 
