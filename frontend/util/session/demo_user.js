@@ -1,4 +1,4 @@
 export const demoUser = {
-    email: 'demoUser@youcast.com',
+    email: 'demo@youcast.com',
     password: 'demo123'
 }
