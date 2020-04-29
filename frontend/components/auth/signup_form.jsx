@@ -48,7 +48,6 @@ class SignupForm extends React.Component {
     }
 
     render() {
-
         const formContent = (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-header">
@@ -80,7 +79,7 @@ class SignupForm extends React.Component {
                     />
                     { this.props.errors.length > 0 ? this.renderError(this.props.errors) : null}
                 </div>
-                <button className="demo-btn" onClick={this.demoLogin}>Login as a Demo User</button>
+                <div className="demo-btn" onClick={this.demoLogin}>Login as a Demo User</div>
                 <div className="form-bottom">
                     <Link className="signup-link" to="/login">Sign in instead</Link>
                     <button className="next-btn" input="submit">Next</button>

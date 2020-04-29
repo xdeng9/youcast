@@ -4,7 +4,7 @@ import Root from './components/root';
 
 import configureStore from './store/store';
 
-import { receiveUser } from './actions/session';
+import { verifyEmail } from './util/session/session_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore();
     }
 
-    window.receiveUser = receiveUser;
+    window.verifyEmail = verifyEmail;
     window.store = store;
     window.dispatch = store.dispatch;
     window.getState = store.getState;

@@ -1,3 +1,11 @@
+export const verifyEmail = email => {
+    return $.ajax({
+        url: 'api/verify_email',
+        method: 'GET',
+        data: { email }
+    })
+}
+
 export const logIn = user => {
     return $.ajax({
         url: 'api/session',

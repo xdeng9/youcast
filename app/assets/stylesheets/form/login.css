@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.form-header img {
+    padding-left: 12px;
+}
+
 .form-header h3 {
     font-weight: 400;
     font-size: 22px;
@@ -31,14 +35,14 @@
     margin: 40px 0;
 }
 
-.email-input-field {
+.login-input-field {
     height: 30px;
     padding: 10px;
     border: 1px solid #d3d3d3;
     border-radius: 5px;
 }
 
-.email-input-field:focus {
+.login-input-field:focus {
     border: 2px solid #427fed;
 }
 
@@ -70,8 +74,19 @@
     font-weight: 600;
 }
 
+.demo-btn:hover {
+    cursor: pointer;
+}
+
 .signup-link {
     color: #427fed;
     font-weight: 600;
     padding-top: 10px;
+}
+
+.form-message-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

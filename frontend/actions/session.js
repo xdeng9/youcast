@@ -6,7 +6,7 @@ import {
     CLEAR_ERRORS
 } from './action_constants';
 
-export const receiveUser = user => ({
+const receiveUser = user => ({
     type: RECEIVE_CURRENT_USER,
     user
 })

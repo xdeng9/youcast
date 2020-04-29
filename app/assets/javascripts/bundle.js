@@ -110,18 +110,18 @@ var CLEAR_ERRORS = 'CLEAR_ERRORS';
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
   \*************************************/
-/*! exports provided: receiveUser, clearErrors, signup, login, logout */
+/*! exports provided: clearErrors, signup, login, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session/session_api_util */ "./frontend/util/session/session_api_util.js");
 /* harmony import */ var _action_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./action_constants */ "./frontend/actions/action_constants.js");
+
 
 
 var receiveUser = function receiveUser(user) {
@@ -271,6 +271,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _util_session_demo_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/session/demo_user */ "./frontend/util/session/demo_user.js");
+/* harmony import */ var _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/session/session_api_util */ "./frontend/util/session/session_api_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -299,6 +300,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var LoginForm = /*#__PURE__*/function (_React$Component) {
   _inherits(LoginForm, _React$Component);
 
@@ -311,10 +313,10 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      username: '',
       email: '',
       password: '',
-      validEmail: null
+      validEmail: false,
+      error: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.demoLogin = _this.demoLogin.bind(_assertThisInitialized(_this));
@@ -327,8 +329,18 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      this.props.action(this.state).then(function () {
+      if (this.state.validEmail) this.props.action(this.state).then(function () {
         return _this2.props.history.push('/');
+      }, function () {
+        return _this2.setState({
+          error: true
+        });
+      });else Object(_util_session_session_api_util__WEBPACK_IMPORTED_MODULE_3__["verifyEmail"])(this.state.email).then(function (res) {
+        _this2.setState({
+          validEmail: res.valid_email,
+          error: res.error,
+          email: res.email || ''
+        });
       });
     }
   }, {
@@ -353,21 +365,48 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderError",
     value: function renderError() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      if (!this.state.validEmail) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "error-message"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-exclamation-circle"
       }), "  Couldn't find your email");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "error-message"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-exclamation-circle"
+      }), "  Wrong password");
+    }
+  }, {
+    key: "getField",
+    value: function getField() {
+      if (this.state.validEmail) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "login-input-field",
+        type: "password",
+        placeholder: "Password",
+        value: this.state.password,
+        onChange: this.handleUpdate('password')
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "login-input-field",
+        type: "text",
+        placeholder: "Email",
+        value: this.state.email,
+        onChange: this.handleUpdate('email')
+      });
+    }
+  }, {
+    key: "getMessage",
+    value: function getMessage() {
+      if (this.state.validEmail) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-message-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.email));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-message-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "to continue to YouCast"));
     }
   }, {
     key: "render",
     value: function render() {
-      // <input
-      //     type="password"
-      //     placeholder="Password"
-      //     value={this.state.password}
-      //     onChange={this.handleUpdate('password')}
-      // />
       var formContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -375,15 +414,9 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.youcastLogo,
         alt: "logo"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "to continue to YouCast")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), this.getMessage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-input"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "email-input-field",
-        type: "text",
-        placeholder: "Email",
-        value: this.state.email,
-        onChange: this.handleUpdate('email')
-      }), this.props.errors[0] === 'Invalid email or password' ? this.renderError() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.getField(), this.state.error ? this.renderError() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-btn",
         onClick: this.demoLogin
       }, "Login as a Demo User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -393,7 +426,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
         to: "/signup"
       }, "Create account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "next-btn",
-        input: "submit"
+        type: "submit"
       }, "Next")));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-wrapper"
@@ -587,7 +620,7 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
         placeholder: "Password",
         value: this.state.password,
         onChange: this.handleUpdate('password')
-      }), this.props.errors.length > 0 ? this.renderError(this.props.errors) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), this.props.errors.length > 0 ? this.renderError(this.props.errors) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-btn",
         onClick: this.demoLogin
       }, "Login as a Demo User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -785,7 +818,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _actions_session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session */ "./frontend/actions/session.js");
+/* harmony import */ var _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/session/session_api_util */ "./frontend/util/session/session_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -811,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
-  window.receiveUser = _actions_session__WEBPACK_IMPORTED_MODULE_4__["receiveUser"];
+  window.verifyEmail = _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_4__["verifyEmail"];
   window.store = store;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
@@ -1101,14 +1134,24 @@ var demoUser = {
 /*!***************************************************!*\
   !*** ./frontend/util/session/session_api_util.js ***!
   \***************************************************/
-/*! exports provided: logIn, logOut, signUp */
+/*! exports provided: verifyEmail, logIn, logOut, signUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "verifyEmail", function() { return verifyEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logIn", function() { return logIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logOut", function() { return logOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
+var verifyEmail = function verifyEmail(email) {
+  return $.ajax({
+    url: 'api/verify_email',
+    method: 'GET',
+    data: {
+      email: email
+    }
+  });
+};
 var logIn = function logIn(user) {
   return $.ajax({
     url: 'api/session',
