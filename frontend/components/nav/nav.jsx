@@ -3,11 +3,35 @@ import { Link } from 'react-router-dom';
 
 class Nav extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: ''
+        };
+    }
+
     renderUserLogo() {
         const { currentUser } = this.props;
         return (
             <div className="user-logo">
                 <span>{currentUser.username[0].toUpperCase()}</span> 
+            </div>
+        )
+    }
+
+    renderSearchBar() {
+        return (
+            <div className="search-bar-container">
+                <form className="search-bar">
+                    <input
+                    className="search-field" 
+                    type="text" 
+                    placeholder="Search" 
+                    value={this.state.search} />
+                    <button className="search-btn">
+                        <i className="far fa-search"></i>
+                    </button>
+                </form>
             </div>
         )
     }
@@ -23,6 +47,8 @@ class Nav extends Component {
                 </div>
             </div>
         )
+
+        const centerDisplay = this.renderSearchBar();
 
         const authDisplay = this.props.currentUser ? (
             <button onClick={() => this.props.logout()}>{this.renderUserLogo()}</button>
@@ -42,6 +68,7 @@ class Nav extends Component {
         return (
             <div className="nav-bar">
                 {leftDisplay}
+                {centerDisplay}
                 {rightDisplay}
             </div>
         )

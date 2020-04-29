@@ -689,10 +689,16 @@ var Nav = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Nav);
 
-  function Nav() {
+  function Nav(props) {
+    var _this;
+
     _classCallCheck(this, Nav);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      search: ''
+    };
+    return _this;
   }
 
   _createClass(Nav, [{
@@ -704,9 +710,27 @@ var Nav = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username[0].toUpperCase()));
     }
   }, {
+    key: "renderSearchBar",
+    value: function renderSearchBar() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "search-bar-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "search-bar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "search-field",
+        type: "text",
+        placeholder: "Search",
+        value: this.state.search
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "search-btn"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-search"
+      }))));
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var leftDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-left"
@@ -720,9 +744,10 @@ var Nav = /*#__PURE__*/function (_Component) {
         src: window.youcastLogo,
         alt: "logo"
       }))));
+      var centerDisplay = this.renderSearchBar();
       var authDisplay = this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this.props.logout();
+          return _this2.props.logout();
         }
       }, this.renderUserLogo()) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "login-btn",
@@ -741,7 +766,7 @@ var Nav = /*#__PURE__*/function (_Component) {
       })), authDisplay);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-bar"
-      }, leftDisplay, rightDisplay);
+      }, leftDisplay, centerDisplay, rightDisplay);
     }
   }]);
 

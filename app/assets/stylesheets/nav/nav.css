@@ -65,3 +65,39 @@
     width: 38px;
     line-height: 38px;
 }
+
+.search-bar-container {
+    width: 55%;
+    
+}
+
+.search-btn {
+    color: #c1c1c1;
+    background-color: #f8f8f8;
+    height: 28px;
+    width: 60px;
+    border-right: 1px solid #d3d3d3;
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    border-radius: 2px 0 0 2px;
+    text-align: center;
+}
+
+.search-field {
+    border: 1px solid #d3d3d3;
+    padding: 2px 6px;
+    border-radius: 2px 0 0 2px;
+    line-height: 24px;
+    margin-left: 4px;
+    width: 70%;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-field:focus {
+    border: 1px solid #427fed;
+}
