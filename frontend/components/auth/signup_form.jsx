@@ -26,11 +26,6 @@ class SignupForm extends React.Component {
         this.props.action(this.state).then(() => this.props.history.push('/'));
     }
 
-    isValidEmail(email) {
-        let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return emailFormat.test(email);
-    }
-
     handleUpdate(type) {
         return (e) => {
             this.setState({
@@ -39,11 +34,17 @@ class SignupForm extends React.Component {
         }
     }
 
-    renderError(errorMessage) {
+    renderError(errorMessages) {
         return (
-            <p className="error-message">
-                <i className="fas fa-exclamation-circle"></i>  { errorMessage.join(' *') }
-            </p>
+            <ul className="error-message">
+                { errorMessages.map(error => {
+                    return (
+                        <li>
+                            <i className="fas fa-exclamation-circle"></i> {error}
+                        </li>
+                    )
+                })}
+            </ul>
         )
     }
 

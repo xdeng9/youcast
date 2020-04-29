@@ -573,12 +573,6 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "isValidEmail",
-    value: function isValidEmail(email) {
-      var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return emailFormat.test(email);
-    }
-  }, {
     key: "handleUpdate",
     value: function handleUpdate(type) {
       var _this4 = this;
@@ -589,12 +583,14 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "renderError",
-    value: function renderError(errorMessage) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    value: function renderError(errorMessages) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "error-message"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-exclamation-circle"
-      }), "  ", errorMessage.join(' *'));
+      }, errorMessages.map(function (error) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-exclamation-circle"
+        }), " ", error);
+      }));
     }
   }, {
     key: "render",
