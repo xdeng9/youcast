@@ -19,12 +19,15 @@ class Nav extends Component {
            <button onClick={() => this.props.logout()}>Logout</button>
             
             ) : (
-                    <p><Link to="/login" to="login">SIGN IN</Link></p>
+                    <Link className="login-btn" to="/login">
+                        <i className="fas fa-user-circle"></i>
+                        <span className="login-link">SIGN IN</span>
+                    </Link>
             )
 
         const rightDisplay = (
             <div className="nav-right">
-                <button><i className="fas fa-video-plus"></i></button>
+                <button><i className="fas fa-video-plus fa-lg"></i></button>
                 {authDisplay}
             </div>)
 
