@@ -26,16 +26,17 @@ class SignupForm extends React.Component {
         this.props.action(this.state).then(() => this.props.history.push('/'));
     }
 
+    isValidEmail(email) {
+        let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return emailFormat.test(email);
+    }
+
     handleUpdate(type) {
         return (e) => {
             this.setState({
                 [type]: e.currentTarget.value
             })
         }
-    }
-
-    checkErrors(){
-        return this.props.errors.length > 0 && this.props.errors[0] !== 'Invalid email or password'
     }
 
     renderError(errorMessage) {

@@ -534,6 +534,12 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "isValidEmail",
+    value: function isValidEmail(email) {
+      var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return emailFormat.test(email);
+    }
+  }, {
     key: "handleUpdate",
     value: function handleUpdate(type) {
       var _this4 = this;
@@ -541,11 +547,6 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         _this4.setState(_defineProperty({}, type, e.currentTarget.value));
       };
-    }
-  }, {
-    key: "checkErrors",
-    value: function checkErrors() {
-      return this.props.errors.length > 0 && this.props.errors[0] !== 'Invalid email or password';
     }
   }, {
     key: "renderError",
