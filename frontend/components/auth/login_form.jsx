@@ -77,7 +77,10 @@ class LoginForm extends React.Component {
         if (this.state.validEmail) return (
             <div className="form-message-container">
                 <h3>Welcome</h3>
-                <p>{this.state.email}</p>
+                <p className="email-container">
+                    <i className="fas fa-user-circle"></i>
+                    <span className="email-display">{this.state.email}</span>
+                </p>
             </div>
         );
         return (

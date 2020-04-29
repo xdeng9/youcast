@@ -90,3 +90,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.email-display {
+    padding-left: 8px;
+}
+
+.email-container {
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: solid 1px #d3d3d3;
+}
