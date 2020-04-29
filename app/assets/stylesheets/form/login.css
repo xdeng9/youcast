@@ -72,6 +72,7 @@
     color: #427fed;
     margin-bottom: 40px;
     font-weight: 600;
+    width: fit-content;
 }
 
 .demo-btn:hover {
