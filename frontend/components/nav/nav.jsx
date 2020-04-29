@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 
 class Nav extends Component {
 
+    renderUserLogo() {
+        const { currentUser } = this.props;
+        return (
+            <div className="user-logo">
+                <span>{currentUser.username[0].toUpperCase()}</span> 
+            </div>
+        )
+    }
+
     render() {
         const leftDisplay = (
             <div className="nav-left">
@@ -16,8 +25,7 @@ class Nav extends Component {
         )
 
         const authDisplay = this.props.currentUser ? (
-           <button onClick={() => this.props.logout()}>Logout</button>
-            
+            <button onClick={() => this.props.logout()}>{this.renderUserLogo()}</button>
             ) : (
                     <Link className="login-btn" to="/login">
                         <i className="fas fa-user-circle"></i>
@@ -27,7 +35,7 @@ class Nav extends Component {
 
         const rightDisplay = (
             <div className="nav-right">
-                <button><i className="fas fa-video-plus fa-lg"></i></button>
+                <button className="video-icon"><i className="fas fa-video-plus fa-lg"></i></button>
                 {authDisplay}
             </div>)
 

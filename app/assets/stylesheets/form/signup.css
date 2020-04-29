@@ -17,7 +17,7 @@
 }
 
 .form-input-field:focus {
-    border: 2px solid #427fed;
+    border: 1px solid #427fed;
 }
 
 .password {

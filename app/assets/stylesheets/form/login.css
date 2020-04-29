@@ -1,6 +1,6 @@
 .form-wrapper {
     color:#202124;
-    font-family: roboto, 'Noto Sans Myanmar UI',arial,sans-serif;;
+    font-family: roboto, 'Noto Sans Myanmar UI',arial,sans-serif;
     margin: 140px auto;
     height: 416px;
     width: 370px;
@@ -43,7 +43,7 @@
 }
 
 .login-input-field:focus {
-    border: 2px solid #427fed;
+    border: 1px solid #427fed;
 }
 
 .form-bottom {
