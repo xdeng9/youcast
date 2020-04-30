@@ -83,6 +83,10 @@
     text-align: center;
 }
 
+.search-btn:hover {
+    background-color: #f1f1f1;
+}
+
 .search-field {
     border: 1px solid #d3d3d3;
     padding: 2px 6px;
