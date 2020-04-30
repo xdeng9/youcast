@@ -21,4 +21,10 @@ class Video < ApplicationRecord
     belongs_to :creator,
     foreign_key: :creator_id,
     class_name: :User 
+
+    private
+
+    def video_params
+        params.require(:video).permit(:title, :description)
+    end
 end
