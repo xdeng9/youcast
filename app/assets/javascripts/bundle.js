@@ -1016,10 +1016,13 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/entities/users_reducer.js");
+/* harmony import */ var _videos_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./videos_reducer */ "./frontend/reducers/entities/videos_reducer.js");
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  videos: _videos_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -1056,6 +1059,46 @@ var usersReducer = function usersReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/entities/videos_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/reducers/entities/videos_reducer.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/action_constants */ "./frontend/actions/action_constants.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var videosReducer = function videosReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO"]:
+      return Object.assign({}, state, _defineProperty({}, action.video.id, action.video));
+
+    case _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEOS"]:
+      return action.videos;
+
+    case _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__["REMOVE_VIDEO"]:
+      var nextState = Object.assign({}, state);
+      delete nextState[action.videoId];
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (videosReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/errors/errors_reducer.js":
 /*!****************************************************!*\
   !*** ./frontend/reducers/errors/errors_reducer.js ***!
@@ -1067,9 +1110,12 @@ var usersReducer = function usersReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/errors/session_errors_reducer.js");
+/* harmony import */ var _video_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./video_errors_reducer */ "./frontend/reducers/errors/video_errors_reducer.js");
+
 
 
 var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  video: _video_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
@@ -1109,6 +1155,39 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sessionErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/errors/video_errors_reducer.js":
+/*!**********************************************************!*\
+  !*** ./frontend/reducers/errors/video_errors_reducer.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/action_constants */ "./frontend/actions/action_constants.js");
+
+
+var videoErrorsReducer = function videoErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO_ERRORS"]:
+      return action.errors;
+
+    case _actions_action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (videoErrorsReducer);
 
 /***/ }),
 
