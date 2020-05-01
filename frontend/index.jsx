@@ -4,7 +4,7 @@ import Root from './components/root';
 
 import configureStore from './store/store';
 
-import { verifyEmail } from './util/session/session_api_util';
+import { fetchVideos } from './util/video_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore();
     }
 
-    window.verifyEmail = verifyEmail;
+    window.fetchVideos = fetchVideos;
     window.store = store;
     window.dispatch = store.dispatch;
     window.getState = store.getState;

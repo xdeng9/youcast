@@ -10,6 +10,10 @@ class Nav extends Component {
         };
     }
 
+    handleUpdate() {
+
+    }
+
     renderUserLogo() {
         const { currentUser } = this.props;
         return (
@@ -24,6 +28,7 @@ class Nav extends Component {
             <div className="search-bar-container">
                 <form className="search-bar">
                     <input
+                    onChange={this.handleUpdate}
                     className="search-field" 
                     type="text" 
                     placeholder="Search" 

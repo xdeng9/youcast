@@ -702,6 +702,9 @@ var Nav = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Nav, [{
+    key: "handleUpdate",
+    value: function handleUpdate() {}
+  }, {
     key: "renderUserLogo",
     value: function renderUserLogo() {
       var currentUser = this.props.currentUser;
@@ -717,6 +720,7 @@ var Nav = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.handleUpdate,
         className: "search-field",
         type: "text",
         placeholder: "Search",
@@ -855,7 +859,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/session/session_api_util */ "./frontend/util/session/session_api_util.js");
+/* harmony import */ var _util_video_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/video_api_util */ "./frontend/util/video_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -881,7 +885,7 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
-  window.verifyEmail = _util_session_session_api_util__WEBPACK_IMPORTED_MODULE_4__["verifyEmail"];
+  window.fetchVideos = _util_video_api_util__WEBPACK_IMPORTED_MODULE_4__["fetchVideos"];
   window.store = store;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
@@ -1211,6 +1215,32 @@ var signUp = function signUp(user) {
     data: {
       user: user
     }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/video_api_util.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/video_api_util.js ***!
+  \*****************************************/
+/*! exports provided: fetchVideos, fetchVideo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideos", function() { return fetchVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideo", function() { return fetchVideo; });
+var fetchVideos = function fetchVideos() {
+  return $.ajax({
+    url: 'api/videos',
+    method: 'GET'
+  });
+};
+var fetchVideo = function fetchVideo(videoId) {
+  return $.ajax({
+    url: "api/videos/".concat(videoId),
+    method: 'GET'
   });
 };
 
