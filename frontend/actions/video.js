@@ -22,7 +22,21 @@ const receiveVideoErrors = errors => ({
 })
 
 export const fetchVideos = () => dispatch => VideoApiUtil.fetchVideos()
-    .then(videos => dispatch(receiveVideos(videos)));
+    .then(videos => dispatch(receiveVideos(videos)),
+        errors => dispatch(receiveVideoErrors(errors)));
 
 export const fetchVideo = videoId => dispatch => VideoApiUtil.fetchVideo(videoId)
-    .then(video => dispatch(receiveVideo(video)));
+    .then(video => dispatch(receiveVideo(video)),
+        errors => dispatch(receiveVideoErrors(errors)));
+
+export const createVideo = formData => dispatch => VideoApiUtil.createVideo(formData)
+    .then(video => dispatch(receiveVideo(video)),
+        errors => dispatch(receiveVideoErrors(errors)));
+
+export const updateVideo = (formData, videoId) => VideoApiUtil.updateVideo(formData, videoId)
+    .then(video => dispatch(receiveVideo(video)),
+        errors => dispatch(receiveVideoErrors(errors)));
+
+export const deleteVideo = videoId => VideoApiUtil.deleteVideo(videoId)
+    .then(video => dispatch(removeVideo(video.id)),
+        errors => dispatch(receiveVideoErrors(errors)));
