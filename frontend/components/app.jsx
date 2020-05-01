@@ -11,7 +11,7 @@ const App = () => {
     return (
         <div className="app">
             <Route exact path="/" component={NavContainer}/>
-            <Route path='/' component={VideoIndex}/>
+            <Route exact path='/' component={VideoIndex}/>
             <AuthRoute exact path="/login" component={LoginContainer}/>
             <AuthRoute exact path="/signup" component={SignupFormContainer}/>
         </div>
