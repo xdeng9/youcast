@@ -7,6 +7,13 @@ const VideoIndexItem = ({video}) => {
             <div className="thumbnail-wrapper"> 
                 <img className="thumbnail" src={video.thumbnail} />
             </div>
+            <div>
+                <p className="video-title">{video.title}</p>
+                <section className="video-details">
+                    <span>{video.creator}</span>
+                    <p>{video.view_count} views <span>&#5867;</span> 2 weeks ago</p>
+                </section>
+            </div>
         </li>
     )
 }
