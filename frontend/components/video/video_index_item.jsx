@@ -11,7 +11,7 @@ const VideoIndexItem = ({video}) => {
                 <p className="video-title">{video.title}</p>
                 <section className="video-details">
                     <span>{video.creator}</span>
-                    <p>{video.view_count} views <span>&#5867;</span> 2 weeks ago</p>
+                    <p>{video.view_count} views <span>&#5867;</span> {video.doc}</p>
                 </section>
             </div>
         </li>

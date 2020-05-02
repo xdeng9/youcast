@@ -687,12 +687,21 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "genKey",
+    value: function genKey() {
+      return Math.floor(Math.random() * 100001);
+    }
+  }, {
     key: "renderError",
     value: function renderError(errorMessages) {
+      var _this5 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "error-message"
       }, errorMessages.map(function (error) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: _this5.genKey()
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fas fa-exclamation-circle"
         }), " ", error);
       }));
@@ -801,8 +810,11 @@ var Nav = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      search: ''
+      search: '',
+      dropdown: false
     };
+    _this.hideDropDown = _this.hideDropDown.bind(_assertThisInitialized(_this));
+    _this.showDropdown = _this.showDropdown.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -810,12 +822,70 @@ var Nav = /*#__PURE__*/function (_Component) {
     key: "handleUpdate",
     value: function handleUpdate() {}
   }, {
+    key: "showDropdown",
+    value: function showDropdown(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.setState({
+        dropdown: true
+      }, function () {
+        document.addEventListener('click', _this2.hideDropDown);
+      });
+    }
+  }, {
+    key: "hideDropDown",
+    value: function hideDropDown(e) {
+      var _this3 = this;
+
+      var dropdown = document.getElementsByClassName('dropdown-container')[0];
+      var logoutBtn = document.getElementsByClassName('logout-btn')[0];
+
+      if (e.target === logoutBtn || !dropdown.contains(e.target)) {
+        this.setState({
+          dropdown: false
+        }, function () {
+          document.removeEventListener('click', _this3.hideDropDown);
+        });
+      }
+    }
+  }, {
     key: "renderUserLogo",
     value: function renderUserLogo() {
       var currentUser = this.props.currentUser;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-logo"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username[0].toUpperCase()));
+    }
+  }, {
+    key: "renderDropDown",
+    value: function renderDropDown() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-info"
+      }, this.renderUserLogo(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "username-email"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "info-username"
+      }, this.props.currentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentUser.email))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-links"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link-item",
+        href: "#"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-github"
+      }), "Github"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link-item",
+        href: "#"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-linkedin"
+      }), "LinkedIn"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "link-item logout-btn",
+        onClick: this.props.logout
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-sign-out-alt"
+      }), "Sign out")));
     }
   }, {
     key: "renderSearchBar",
@@ -839,8 +909,6 @@ var Nav = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var leftDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-left"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -855,9 +923,7 @@ var Nav = /*#__PURE__*/function (_Component) {
       }))));
       var centerDisplay = this.renderSearchBar();
       var authDisplay = this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          return _this2.props.logout();
-        }
+        onClick: this.showDropdown
       }, this.renderUserLogo()) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "login-btn",
         to: "/login"
@@ -872,7 +938,7 @@ var Nav = /*#__PURE__*/function (_Component) {
         className: "video-icon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-video-plus fa-lg"
-      })), authDisplay);
+      })), authDisplay, this.state.dropdown ? this.renderDropDown() : null);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-bar"
       }, leftDisplay, centerDisplay, rightDisplay);
@@ -1086,7 +1152,7 @@ var VideoIndexItem = function VideoIndexItem(_ref) {
     className: "video-title"
   }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "video-details"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, video.creator), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.view_count, " views ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u16EB"), " 2 weeks ago"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, video.creator), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.view_count, " views ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u16EB"), " ", video.doc))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VideoIndexItem);
