@@ -1,0 +1,11 @@
+.videos-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    flex-direction: row;
+}
+
+.recomended {
+    margin: 24px 8px 0;
+    font-weight: 600;
+}

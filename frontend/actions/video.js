@@ -11,7 +11,7 @@ const receiveVideo = video => ({
     video 
 })
 
-const removeVideo = videoId = ({
+const removeVideo = videoId => ({
     type: REMOVE_VIDEO,
     videoId
 })

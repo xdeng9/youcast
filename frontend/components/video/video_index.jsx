@@ -1,43 +1,28 @@
 import React from 'react';
-import { fetchVideo } from '../../util/video_api_util';
+import VideoIndexItem from './video_index_item';
 
 class VideoIndex extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            title: '',
-            description: '',
-            view_count: '',
-            thumbnail: '',
-            videoUrl: ''
-        }
     }
 
     componentDidMount() {
-        fetchVideo(1).then(video => this.setState({
-            title: video.title,
-            description: video.description,
-            view_count: video.view_count,
-            thumbnail: video.thumbnail,
-            videoUrl: video.videoUrl
-        }));
-    }
-
-    renderVideo() {
-        return (
-            <video src={this.state.videoUrl} controls></video>
-        )
+        this.props.fetchVideos();
     }
 
     render() {
+        const { videos } = this.props
         return (
             <div>
-                <h3>{this.state.title}</h3>
-                <p>{this.state.description}</p>
-                <p>{this.state.view_count}</p>
-                {this.state.videoUrl === '' ? null : this.renderVideo()}
-                
+                <h3 className="recomended">Recomended</h3>
+                <div className="content-container">
+                    <ul className="videos-container">
+                        { videos.map(video => {
+                            return <VideoIndexItem key={video.id} video={video}/>
+                        }) }
+                    </ul>
+                </div>
             </div>
         )
     }
