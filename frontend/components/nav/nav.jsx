@@ -96,7 +96,7 @@ class Nav extends Component {
     render() {
         const leftDisplay = (
             <div className="nav-left">
-                <button><i className="far fa-bars"></i></button>
+                <button onClick={this.props.toggleSidebar}><i className="far fa-bars"></i></button>
                 <div className="logo">
                     <Link to="/">
                         <img src={window.youcastLogo} alt="logo" />
