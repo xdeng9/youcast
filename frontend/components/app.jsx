@@ -9,12 +9,12 @@ import VideoShowContainer from './video/video_show_container';
 const App = () => {
     return (
         <div className="app">
-            <Route path="/" component={NavContainer}/>
+            <NavContainer />
             <div className="main-content">
                 <SidebarContainer />
                 <Switch>
                     <Route exact path="/" component={VideoIndexContainer} />
-                    <Route exact path="/watch/:videoId" component={VideoShowContainer} />
+                    <Route path="/watch/:videoId" component={VideoShowContainer} />
                     <Redirect to="/" />
                 </Switch>
             </div>  

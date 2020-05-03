@@ -47,6 +47,10 @@
     margin-bottom: 16px;
 }
 
+.after-next {
+    margin-top: 16px;
+}
+
 .next-video-container {
     display: flex;
 }
@@ -84,6 +88,44 @@
     font-weight: 400;
     color: #606060;
     font-size: 13px;
+}
+
+.show-video-details {
+    padding-top: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.video-details-title {
+    font-size: 18px;
+}
+
+.view-date-like {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.details-views-date {
+    font-size: 14px;
+    color: #606060;
+    display: flex;
+    align-items: center;
+}
+
+.details-likes {
+    display: flex;
+    width: 280px;
+    justify-content: center;
+}
+
+.thumb-up {
+    margin-right: 80px;
+}
+
+.hover {
+    cursor: pointer;
 }
 
 
