@@ -11,12 +11,13 @@ class VideoShow extends React.Component {
     componentDidMount() {
         this.props.fetchVideo(this.props.match.params.videoId);
         this.props.fetchVideos();
+        window.scrollTo(0, 0)
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
             this.props.fetchVideo(this.props.match.params.videoId);
-            window.location.reload();
+            window.scrollTo(0, 0)
         }
     }
 

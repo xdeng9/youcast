@@ -127,7 +127,7 @@ class Nav extends Component {
 
         const rightDisplay = (
             <div className="nav-right">
-                <button className="video-icon"><i className="fas fa-video-plus fa-lg"></i></button>
+                <Link to="/upload" className="video-icon"><i className="fas fa-video-plus fa-lg"></i></Link>
                 {authDisplay}
                 {this.state.dropdown ? this.renderDropDown() : null}
             </div>)

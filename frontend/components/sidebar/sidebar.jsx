@@ -26,6 +26,10 @@ class Sidebar extends React.Component {
             </div>
         )
     }
+
+    renderModalSB() {
+        
+    }
 }
 
 export default withRouter(Sidebar);
