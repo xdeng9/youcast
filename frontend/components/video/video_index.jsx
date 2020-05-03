@@ -14,13 +14,15 @@ class VideoIndex extends React.Component {
     render() {
         const { videos } = this.props
         return (
-            <div>
-                <h3 className="recomended">Recomended</h3>   
-                <ul className="videos-container">
-                    { videos.map(video => {
-                        return <VideoIndexItem key={video.id} video={video}/>
-                    }) }
-                </ul>
+            <div className="main-content-videos"> 
+                <div className="recomended">Recomended</div>   
+                <div className="videos-outer-wrapper">
+                    <ul className="videos-container">
+                        { videos.map(video => {
+                            return <VideoIndexItem key={video.id} video={video}/>
+                        }) }
+                    </ul>
+                </div>
             </div>
         )
     }

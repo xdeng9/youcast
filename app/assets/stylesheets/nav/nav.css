@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
+    margin: 0 20px;
 }
 
 .logo {
@@ -150,7 +151,7 @@
 }
 
 .link-item:hover {
-    background-color: rgb(221, 217, 217);
+    background-color: #e2e8f0;
 }
 
 .dropdown-links i {

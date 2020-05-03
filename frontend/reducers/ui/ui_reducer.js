@@ -5,10 +5,11 @@ const _initialState = {
 };
 
 const uiReducer = (state = _initialState, action) => {
+    Object.freeze(state);
     switch (action.type) {
         case TOGGLE_SIDE_BAR:
             let flag = !state.partial;
-            return Object.assign(state, { partial: flag })
+            return Object.assign({}, state, { partial: flag })
         default:
             return state;
     }

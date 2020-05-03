@@ -10,12 +10,14 @@ const App = () => {
     return (
         <div className="app">
             <Route path="/" component={NavContainer}/>
-            <SidebarContainer />
-            <Switch>
-                <Route exact path="/" component={VideoIndexContainer}/>
-                <Route exact path="/watch/:videoId" component={VideoShowContainer}/>
-                <Redirect to="/" />
-            </Switch>
+            <div className="main-content">
+                <SidebarContainer />
+                <Switch>
+                    <Route exact path="/" component={VideoIndexContainer} />
+                    <Route exact path="/watch/:videoId" component={VideoShowContainer} />
+                    <Redirect to="/" />
+                </Switch>
+            </div>  
         </div>
     )
 }
