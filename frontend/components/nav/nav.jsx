@@ -11,6 +11,7 @@ class Nav extends Component {
         };
         this.hideDropDown = this.hideDropDown.bind(this);
         this.showDropdown = this.showDropdown.bind(this);
+        this.processQuery = this.processQuery.bind(this);
     }
 
     handleUpdate() {
@@ -18,6 +19,11 @@ class Nav extends Component {
             e.preventDefault();
             this.setState({ search: e.target.value })
         }
+    }
+
+    processQuery(e) {
+        e.preventDefault();
+        //TBD
     }
 
     showDropdown(e) {
@@ -81,7 +87,7 @@ class Nav extends Component {
     renderSearchBar() {
         return (
             <div className="search-bar-container">
-                <form className="search-bar">
+                <form className="search-bar" onSubmit={this.processQuery}>
                     <input
                     onChange={this.handleUpdate()}
                     className="search-field" 
