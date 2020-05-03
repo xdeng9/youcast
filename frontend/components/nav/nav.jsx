@@ -14,7 +14,10 @@ class Nav extends Component {
     }
 
     handleUpdate() {
-
+        return (e) => {
+            e.preventDefault();
+            this.setState({ search: e.target.value })
+        }
     }
 
     showDropdown(e) {
@@ -58,11 +61,11 @@ class Nav extends Component {
                     </div>
                 </div>
                 <div className="dropdown-links">
-                    <a className="link-item" href="#">
+                    <a className="link-item" href="https://github.com/xdeng9" target="_blank">
                         <i className="fab fa-github"></i>
                         Github
                     </a>
-                    <a className="link-item" href="#">
+                    <a className="link-item" href="http://linkedin.com/in/xideng" target="_blank">
                         <i className="fab fa-linkedin"></i>
                         LinkedIn
                     </a>
@@ -80,7 +83,7 @@ class Nav extends Component {
             <div className="search-bar-container">
                 <form className="search-bar">
                     <input
-                    onChange={this.handleUpdate}
+                    onChange={this.handleUpdate()}
                     className="search-field" 
                     type="text" 
                     placeholder="Search" 
