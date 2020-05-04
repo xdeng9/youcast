@@ -1695,10 +1695,8 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
         this.setState({
           loading: true
         });
-        this.props.createVideo(formData).then(function (video) {
-          console.log(video, video.id);
-
-          _this3.props.history.push("/");
+        this.props.createVideo(formData).then(function (obj) {
+          _this3.props.history.push("/watch/".concat(obj.video.id));
         }, function () {
           return _this3.setState({
             loading: false

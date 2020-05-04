@@ -51,9 +51,8 @@ class VideoUpload extends React.Component {
             formData.append('video[video]', this.state.videoFile);
 
             this.setState({ loading: true });
-            this.props.createVideo(formData).then(video => {
-                console.log(video, video.id)
-                this.props.history.push(`/`) },
+            this.props.createVideo(formData).then(obj => {
+                this.props.history.push(`/watch/${obj.video.id}`) },
                 () => this.setState({ loading: false }))
         }
 
