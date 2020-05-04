@@ -1409,15 +1409,28 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchVideo(this.props.match.params.videoId);
       this.props.fetchVideos();
-      window.scrollTo(0, 0);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
         this.props.fetchVideo(this.props.match.params.videoId);
-        window.scrollTo(0, 0);
+        window.location.reload();
       }
+    }
+  }, {
+    key: "renderEdit",
+    value: function renderEdit() {
+      if (this.props.currentUser !== undefined && this.props.video) {
+        if (this.props.video.creator === this.props.currentUser.username) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            to: "/edit/".concat(this.props.video.id),
+            className: "user-edit hover"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit video"));
+        }
+      }
+
+      return null;
     }
   }, {
     key: "render",
@@ -1464,7 +1477,15 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         className: "thumb-down"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-thumbs-down"
-      })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show-video-user-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-user-circle user-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "creator-details"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.creator))), this.renderEdit())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "right-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "up-next"

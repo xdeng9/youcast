@@ -11,14 +11,26 @@ class VideoShow extends React.Component {
     componentDidMount() {
         this.props.fetchVideo(this.props.match.params.videoId);
         this.props.fetchVideos();
-        window.scrollTo(0, 0)
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
             this.props.fetchVideo(this.props.match.params.videoId);
-            window.scrollTo(0, 0)
+            window.location.reload();
         }
+    }
+
+    renderEdit() {
+        if (this.props.currentUser !== undefined && this.props.video) {
+            if (this.props.video.creator === this.props.currentUser.username) {
+                return (
+                    <Link to={`/edit/${this.props.video.id}`} className="user-edit hover">
+                        <p>Edit video</p>
+                    </Link>
+                )
+            }
+        } 
+        return null;
     }
 
     render() {
@@ -58,6 +70,15 @@ class VideoShow extends React.Component {
                             </div>
                         </div>
                     </div> 
+                    <div className="show-video-user-box">
+                        <div className="user-box">
+                            <i className="fas fa-user-circle user-icon"></i>
+                            <div className="creator-details">
+                                <p>{video.creator}</p>
+                            </div>
+                        </div>
+                        {this.renderEdit()}
+                    </div>
                 </div>
                 <div className="right-container">
                     <div className="up-next">
