@@ -710,20 +710,13 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
-    key: "genKey",
-    value: function genKey() {
-      return Math.floor(Math.random() * 100001);
-    }
-  }, {
     key: "renderError",
     value: function renderError(errorMessages) {
-      var _this5 = this;
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "error-message"
-      }, errorMessages.map(function (error) {
+      }, errorMessages.map(function (error, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: _this5.genKey()
+          key: idx
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fas fa-exclamation-circle"
         }), " ", error);
@@ -1587,7 +1580,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1611,18 +1607,183 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var VideoUpload = /*#__PURE__*/function (_React$Component) {
   _inherits(VideoUpload, _React$Component);
 
   var _super = _createSuper(VideoUpload);
 
-  function VideoUpload() {
+  function VideoUpload(props) {
+    var _this;
+
     _classCallCheck(this, VideoUpload);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      title: '',
+      description: '',
+      thumbnailFile: null,
+      videoFile: null,
+      loading: false,
+      error: ''
+    };
+    _this.handleVideoUpload = _this.handleVideoUpload.bind(_assertThisInitialized(_this));
+    _this.handleThumbnailUpload = _this.handleThumbnailUpload.bind(_assertThisInitialized(_this));
+    _this.handleUpload = _this.handleUpload.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(VideoUpload, [{
+    key: "handleUpdate",
+    value: function handleUpdate(type) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, type, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "handleVideoUpload",
+    value: function handleVideoUpload(e) {
+      e.preventDefault();
+      this.setState({
+        videoFile: e.currentTarget.files[0]
+      });
+    }
+  }, {
+    key: "handleThumbnailUpload",
+    value: function handleThumbnailUpload(e) {
+      e.preventDefault();
+      this.setState({
+        thumbnailFile: e.currentTarget.files[0]
+      });
+    }
+  }, {
+    key: "handleUpload",
+    value: function handleUpload(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var _this$state = this.state,
+          title = _this$state.title,
+          description = _this$state.description,
+          thumbnailFile = _this$state.thumbnailFile,
+          videoFile = _this$state.videoFile;
+
+      if (title === '' || description === '') {
+        this.setState({
+          error: "Required field can't be blank"
+        });
+      } else if (videoFile === null) {
+        this.setState({
+          error: "Video must be attached"
+        });
+      } else if (thumbnailFile === null) {
+        this.setState({
+          error: "Thumbnail must be attached"
+        });
+      } else {
+        var formData = new FormData();
+        formData.append('video[title]', this.state.title);
+        formData.append('video[description]', this.state.description);
+        formData.append('video[thumbnail]', this.state.thumbnailFile);
+        formData.append('video[video]', this.state.videoFile);
+        this.setState({
+          loading: true
+        });
+        this.props.createVideo(formData).then(function (video) {
+          console.log(video);
+
+          _this3.props.history.push("/watch/".concat(video.id));
+        }, function () {
+          return _this3.setState({
+            loading: false
+          });
+        });
+      }
+
+      return;
+    }
+  }, {
+    key: "renderVideoError",
+    value: function renderVideoError() {
+      if (this.state.error !== '') return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "error-message"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-exclamation-circle"
+      }), "  ", this.state.error);
+
+      if (this.props.errors.length !== 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.error.map(function (error, idx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-exclamation-circle"
+          }), " ", error);
+        }));
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderThumbnail",
+    value: function renderThumbnail() {
+      var styleClass = "thumbnail-select";
+      var message = "Upload thumbnail";
+
+      if (this.state.thumbnailFile !== null) {
+        styleClass = "thumbnail-select green";
+        message = this.state.thumbnailFile.name;
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: styleClass
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "thumbnail-select-input",
+        type: "file",
+        accept: "image/*",
+        onChange: this.handleThumbnailUpload
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-image"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, message));
+    }
+  }, {
+    key: "renderVideo",
+    value: function renderVideo() {
+      var styleClass = "video-select";
+      var message = "Upload video";
+
+      if (this.state.videoFile !== null) {
+        styleClass = "video-select green";
+        message = this.state.videoFile.name;
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: styleClass
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "video-select-input",
+        type: "file",
+        accept: "video/*",
+        onChange: this.handleVideoUpload
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-cloud-upload-alt"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, message));
+    }
+  }, {
+    key: "renderButton",
+    value: function renderButton() {
+      if (!this.state.loading) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "upload-btn-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "upload-btn",
+          onClick: this.handleUpload
+        }, "Upload"));
+      }
+
+      return null;
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1635,32 +1796,22 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
         className: "video-info-wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "thumbnail-video-select"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "thumbnail-select"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-image"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upload thumbnail")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "video-select"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-cloud-upload-alt"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upload video"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.renderThumbnail(), this.renderVideo()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "upload-title-field",
-        placeholder: "Title"
+        placeholder: "Title (required)",
+        onChange: this.handleUpdate('title')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         className: "upload-description-field",
-        placeholder: "Description"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "upload-btn-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "upload-btn"
-      }, "Upload")))));
+        placeholder: "Description (required)",
+        onChange: this.handleUpdate('description')
+      }), this.renderVideoError(), this.renderButton())));
     }
   }]);
 
   return VideoUpload;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (VideoUpload);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(VideoUpload));
 
 /***/ }),
 
@@ -1680,7 +1831,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapsDispatchToprops = function mapsDispatchToprops(dispatch) {
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors.video
+  };
+};
+
+var mapsDispatchToProps = function mapsDispatchToProps(dispatch) {
   return {
     createVideo: function createVideo(formData) {
       return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["createVideo"])(formData));
@@ -1688,7 +1845,7 @@ var mapsDispatchToprops = function mapsDispatchToprops(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapsDispatchToprops)(_video_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapsDispatchToProps)(_video_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 

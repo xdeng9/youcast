@@ -97,3 +97,42 @@
     padding: 10px 30px;
     border-radius: 5px;
 }
+
+.upload-btn:hover {
+    background-color: #3175f4;
+}
+
+.thumbnail-select:hover {
+    cursor: pointer;
+    border-color: #427fed;
+}
+
+.video-select:hover {
+    cursor: pointer;
+    border-color: #427fed;
+}
+
+.upload-title-field:focus {
+    border-color: #427fed;
+}
+.upload-description-field:focus {
+    border-color: #427fed;
+}
+
+.green {
+    color: green;
+}
+
+.video-select-input {
+    position: absolute;
+    opacity: 0;
+    width: 256px;
+    height: 200px;
+}
+
+.thumbnail-select-input {
+    position: absolute;
+    opacity: 0;
+    width: 256px;
+    height: 200px;
+}

@@ -34,16 +34,12 @@ class SignupForm extends React.Component {
         }
     }
 
-    genKey() {
-        return Math.floor(Math.random() * 100001)
-    }
-
     renderError(errorMessages) {
         return (
             <ul className="error-message">
-                { errorMessages.map(error => {
+                { errorMessages.map((error, idx) => {
                     return (
-                        <li key={this.genKey()}>
+                        <li key={idx}>
                             <i className="fas fa-exclamation-circle"></i> {error}
                         </li>
                     )
