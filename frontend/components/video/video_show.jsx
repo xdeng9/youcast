@@ -79,6 +79,11 @@ class VideoShow extends React.Component {
                         </div>
                         {this.renderEdit()}
                     </div>
+                    <div className="show-video-details-description">
+                        <p>
+                            {video.description}
+                        </p>
+                    </div>
                 </div>
                 <div className="right-container">
                     <div className="up-next">

@@ -1478,7 +1478,9 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         className: "fas fa-user-circle user-icon"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "creator-details"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.creator))), this.renderEdit())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.creator))), this.renderEdit()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show-video-details-description"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.description))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "right-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "up-next"
@@ -1692,9 +1694,9 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
           loading: true
         });
         this.props.createVideo(formData).then(function (video) {
-          console.log(video);
+          console.log(video, video.id);
 
-          _this3.props.history.push("/watch/".concat(video.id));
+          _this3.props.history.push("/");
         }, function () {
           return _this3.setState({
             loading: false

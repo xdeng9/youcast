@@ -40,7 +40,7 @@ class Api::VideosController < ApplicationController
             @video.destroy
             render :show 
         else
-            render json: ['Must be the creator to delete this video'], status: 401 
+            render json: ['Must be the owner to delete this video'], status: 401 
         end
     end
 
