@@ -132,8 +132,15 @@ class VideoUpload extends React.Component {
                     <button className="upload-btn" onClick={this.handleUpload}>Upload</button>
                 </div>
             )
+        } else {
+            return (
+                <div className="upload-btn-container">
+                    <div className="loader-container">
+                        <div className="loader"></div>
+                    </div>
+                </div>
+            )
         }
-        return null;
     }
 
     render() {

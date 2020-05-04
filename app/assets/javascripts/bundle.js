@@ -1783,9 +1783,15 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
           className: "upload-btn",
           onClick: this.handleUpload
         }, "Upload"));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "upload-btn-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "loader-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "loader"
+        })));
       }
-
-      return null;
     }
   }, {
     key: "render",
