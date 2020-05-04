@@ -9,6 +9,7 @@ class VideoUpload extends React.Component {
             title: '',
             description: '',
             thumbnailFile: null,
+            thumbnailPreview: null,
             videoFile: null,
             loading: false,
             error: ''
@@ -31,7 +32,15 @@ class VideoUpload extends React.Component {
 
     handleThumbnailUpload(e) {
         e.preventDefault();
-        this.setState({ thumbnailFile: e.currentTarget.files[0] })
+        const file = e.currentTarget.files[0]; 
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({
+                thumbnailFile: file,
+                thumbnailPreview: reader.result
+            })
+        }
+        if (file) reader.readAsDataURL(file);
     }
 
     handleUpload(e) {
@@ -85,20 +94,24 @@ class VideoUpload extends React.Component {
     renderThumbnail() {
         let styleClass = "thumbnail-select";
         let message = "Upload thumbnail";
+        let hideImage = "", hideText = "", hidePreview="hide";
         if (this.state.thumbnailFile !== null) {
             styleClass = "thumbnail-select green";
-            message = this.state.thumbnailFile.name;
+            hideImage = "hidden-icon";
+            hideText = "hide"
+            hidePreview = "";
         }
         return (
-            <div className={styleClass}>
+            <div className="thumbnail-select">
                 <input
                     className="thumbnail-select-input"
                     type="file"
                     accept="image/*"
                     onChange={this.handleThumbnailUpload}
                 />
-                <i className="fas fa-image"></i>
-                <p>{message}</p>
+                <i className="fas fa-image" id={hideImage}></i>
+                <p className={hideText}>{message}</p>
+                <img className={hidePreview} src={this.state.thumbnailPreview}></img>
             </div>
         )
     }

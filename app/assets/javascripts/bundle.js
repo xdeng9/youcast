@@ -1627,6 +1627,7 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
       title: '',
       description: '',
       thumbnailFile: null,
+      thumbnailPreview: null,
       videoFile: null,
       loading: false,
       error: ''
@@ -1657,15 +1658,25 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleThumbnailUpload",
     value: function handleThumbnailUpload(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      this.setState({
-        thumbnailFile: e.currentTarget.files[0]
-      });
+      var file = e.currentTarget.files[0];
+      var reader = new FileReader();
+
+      reader.onloadend = function () {
+        _this3.setState({
+          thumbnailFile: file,
+          thumbnailPreview: reader.result
+        });
+      };
+
+      if (file) reader.readAsDataURL(file);
     }
   }, {
     key: "handleUpload",
     value: function handleUpload(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
       var _this$state = this.state,
@@ -1696,9 +1707,9 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
           loading: true
         });
         this.props.createVideo(formData).then(function (obj) {
-          _this3.props.history.push("/watch/".concat(obj.video.id));
+          _this4.props.history.push("/watch/".concat(obj.video.id));
         }, function () {
-          return _this3.setState({
+          return _this4.setState({
             loading: false
           });
         });
@@ -1732,22 +1743,33 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
     value: function renderThumbnail() {
       var styleClass = "thumbnail-select";
       var message = "Upload thumbnail";
+      var hideImage = "",
+          hideText = "",
+          hidePreview = "hide";
 
       if (this.state.thumbnailFile !== null) {
         styleClass = "thumbnail-select green";
-        message = this.state.thumbnailFile.name;
+        hideImage = "hidden-icon";
+        hideText = "hide";
+        hidePreview = "";
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: styleClass
+        className: "thumbnail-select"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "thumbnail-select-input",
         type: "file",
         accept: "image/*",
         onChange: this.handleThumbnailUpload
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-image"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, message));
+        className: "fas fa-image",
+        id: hideImage
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: hideText
+      }, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: hidePreview,
+        src: this.state.thumbnailPreview
+      }));
     }
   }, {
     key: "renderVideo",

@@ -167,3 +167,16 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.hide {
+    display: none;
+}
+
+#hidden-icon {
+    display: none;
+}
+
+/* .thumbnail-select img {
+    width: 256px;
+    height: 200px;
+} */
