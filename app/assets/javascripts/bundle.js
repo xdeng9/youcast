@@ -1625,7 +1625,35 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
   _createClass(VideoUpload, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello from the upload page!!!"));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "upload-form-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "upload-form-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "video-form-title"
+      }, "Upload video"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "video-info-wrapper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "thumbnail-video-select"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "thumbnail-select"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-image"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upload thumbnail")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "video-select"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-cloud-upload-alt"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upload video"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "upload-title-field",
+        placeholder: "Title"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "upload-description-field",
+        placeholder: "Description"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "upload-btn-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "upload-btn"
+      }, "Upload")))));
     }
   }]);
 
@@ -1647,18 +1675,20 @@ var VideoUpload = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _video_upload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./video_upload */ "./frontend/components/video/video_upload.js");
+/* harmony import */ var _actions_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video */ "./frontend/actions/video.js");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
-};
 
 var mapsDispatchToprops = function mapsDispatchToprops(dispatch) {
-  return {};
+  return {
+    createVideo: function createVideo(formData) {
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["createVideo"])(formData));
+    }
+  };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapsDispatchToprops)(_video_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapsDispatchToprops)(_video_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 

@@ -1,0 +1,99 @@
+.upload-form-container {
+    background: #f8f8f8;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.upload-form-box {
+    background-color: white;
+    height: 700px;
+    width: 600px;
+    box-shadow: gray 0px 0px 3px;
+}
+
+.video-form-title {
+    padding: 16px 24px 20px 16px;
+    font-size: 20px;
+    font-weight: 400;
+    border-bottom: 1px solid #dadce0;
+}
+
+.video-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 36px 36px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thumbnail-video-select {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.thumbnail-select {
+    flex-direction: column;
+    width: 256px;
+    height: 200px;
+    display: flex;
+    border: 1px solid #dadce0;
+    color: gray;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.fa-cloud-upload-alt {
+    font-size: 80px;
+}
+
+.fa-image {
+    font-size: 83px;
+}
+
+.video-select {
+    flex-direction: column;
+    width: 256px;
+    height: 200px;
+    display: flex;
+    border: 1px solid #dadce0;
+    color: gray;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.upload-title-field {
+    padding: 10px;
+    margin-top: 36px;
+    border: 1px solid #dadce0;
+    border-radius: 3px;
+    width: 96%;
+}
+
+.upload-description-field {
+    height: 110px;
+    margin-top: 21px;
+    border: 1px solid #dadce0;
+    border-radius: 3px;
+    padding: 10px;
+    width: 96%;
+}
+
+.upload-btn-container {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.upload-btn {
+    background-color: #427fed;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
