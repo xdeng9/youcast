@@ -1543,7 +1543,9 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _video_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./video_show */ "./frontend/components/video/video_show.jsx");
-/* harmony import */ var _actions_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video */ "./frontend/actions/video.js");
+/* harmony import */ var _util_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/selectors */ "./frontend/util/selectors.js");
+/* harmony import */ var _actions_video__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/video */ "./frontend/actions/video.js");
+
 
 
 
@@ -1552,17 +1554,17 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     video: state.entities.videos[ownProps.match.params.videoId],
     currentUser: state.entities.users[state.session.id],
-    videoList: Object.values(state.entities.videos).slice(0, 10)
+    videoList: Object(_util_selectors__WEBPACK_IMPORTED_MODULE_2__["shuffleVideos"])(Object.values(state.entities.videos)).slice(0, 10)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchVideo: function fetchVideo(videoId) {
-      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["fetchVideo"])(videoId));
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_3__["fetchVideo"])(videoId));
     },
     fetchVideos: function fetchVideos() {
-      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["fetchVideos"])());
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_3__["fetchVideos"])());
     }
   };
 };
@@ -2283,16 +2285,27 @@ var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withR
 /*!************************************!*\
   !*** ./frontend/util/selectors.js ***!
   \************************************/
-/*! exports provided: filterVideos */
+/*! exports provided: filterVideos, shuffleVideos */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterVideos", function() { return filterVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shuffleVideos", function() { return shuffleVideos; });
 var filterVideos = function filterVideos(videos, videoId) {
   return videos.filter(function (video) {
     return video.id != videoId;
   });
+};
+var shuffleVideos = function shuffleVideos(videoArray) {
+  for (var i = videoArray.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [videoArray[j], videoArray[i]];
+    videoArray[i] = _ref[0];
+    videoArray[j] = _ref[1];
+  }
+
+  return videoArray;
 };
 
 /***/ }),
