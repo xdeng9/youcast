@@ -6,6 +6,7 @@ import NavContainer from './nav/nav_container';
 import SidebarContainer from './sidebar/sidebar_container';
 import VideoShowContainer from './video/video_show_container';
 import VideoUploadContainer from './video/video_upload_container';
+import VideoEditContainer from './video/video_edit_container';
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                     <Route exact path="/" component={VideoIndexContainer} />
                     <Route path="/watch/:videoId" component={VideoShowContainer} />
                     <ProtectedRoute exact path="/upload" component={VideoUploadContainer} />
+                    <ProtectedRoute exact path="/edit/:videoId" component={VideoEditContainer}/>
                     <Redirect to="/" />
                 </Switch>
             </div>  

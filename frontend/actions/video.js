@@ -38,5 +38,5 @@ export const updateVideo = (formData, videoId) => VideoApiUtil.updateVideo(formD
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));
 
 export const deleteVideo = videoId => VideoApiUtil.deleteVideo(videoId)
-    .then(video => dispatch(removeVideo(video.id)),
+    .then(() => dispatch(removeVideo(videoId)),
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));

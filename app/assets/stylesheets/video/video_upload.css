@@ -98,6 +98,17 @@
     border-radius: 5px;
 }
 
+.delete-btn {
+    background-color: red;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
 .upload-btn:hover {
     background-color: #3175f4;
 }
@@ -174,6 +185,23 @@
 
 #hidden-icon {
     display: none;
+}
+
+.update-btn-container {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.thumbnail-edit-select {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.thumbnail-edit-select input:hover {
+    cursor: pointer;
 }
 
 /* .thumbnail-select img {

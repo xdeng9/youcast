@@ -92,11 +92,9 @@ class VideoUpload extends React.Component {
     }
 
     renderThumbnail() {
-        let styleClass = "thumbnail-select";
         let message = "Upload thumbnail";
         let hideImage = "", hideText = "", hidePreview="hide";
         if (this.state.thumbnailFile !== null) {
-            styleClass = "thumbnail-select green";
             hideImage = "hidden-icon";
             hideText = "hide"
             hidePreview = "";
