@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { filterVideos } from '../../util/selectors';
+import CommentIndexContainer from '../comment/comment_index';
 
 class VideoShow extends React.Component {
 
@@ -83,6 +84,9 @@ class VideoShow extends React.Component {
                         <p>
                             {video.description}
                         </p>
+                    </div>
+                    <div className="show-video-comments">
+                        <CommentIndexContainer  />
                     </div>
                 </div>
                 <div className="right-container">

@@ -1,0 +1,53 @@
+.show-video-comments {
+    margin: 20px 0;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-header {
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+
+.add-comment-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    
+}
+
+.comment-user-icon {
+    font-size: 38px;
+    padding-right: 20px;
+}
+
+.comment-form {
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.comment-field {
+    width: 100%;
+}
+
+.comment-submit-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.comment-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    width: 105px;
+    height: 36px;
+    background-color: #427fed;
+    color: #fff;
+}

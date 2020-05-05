@@ -2,6 +2,10 @@ class Api::CommentsController < ApplicationController
 
     before_action :require_login, only: [:create, :update, :destroy]
 
+    def index 
+        @comments = Comment.where(video_id: params[:video_id])
+        render :index 
+    end
 
     def create
         @comment = Comment.new(comment_params)
