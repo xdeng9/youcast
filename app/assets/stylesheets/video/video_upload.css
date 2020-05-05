@@ -114,12 +114,18 @@
 }
 
 .thumbnail-select:hover {
-    cursor: pointer;
     border-color: #427fed;
 }
 
-.video-select:hover {
+.thumbnail-select input:hover {
     cursor: pointer;
+}
+
+.video-select input:hover {
+    cursor: pointer;
+}
+
+.video-select:hover {
     border-color: #427fed;
 }
 

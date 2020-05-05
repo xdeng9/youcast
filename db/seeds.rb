@@ -8,6 +8,7 @@ require 'open-uri'
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Video.destroy_all
+Comment.destroy_all
 
 User.create([
     {
@@ -166,3 +167,42 @@ tfile10 = open('https://youcast-seeds.s3-us-west-1.amazonaws.com/youtube_clone.j
 youtube.thumbnail.attach(io: tfile10, filename: 'youtube_clone.jpg')
 vfile10 = open('https://youcast-seeds.s3-us-west-1.amazonaws.com/youtube_clone.mp4')
 youtube.video.attach(io: vfile10, filename: 'youtube_clone.mp4')
+
+
+Comment.create([
+    {
+        body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam",
+        author_id: demo.id,
+        video_id: lor.id 
+    },
+    {
+        body: "est natus enim nihil est dolore omnis voluptatem numquam",
+        author_id: joe.id,
+        video_id: lor2.id 
+    },
+    {
+        body: "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui",
+        author_id: jane.id,
+        video_id: lor3.id 
+    },
+    {
+        body: "repellat consequatur praesentium vel minus molestias voluptatum",
+        author_id: jane.id,
+        video_id: sw.id 
+    },
+    {
+        body: "vero eaque aliquid doloribus et culpa",
+        author_id: john.id,
+        video_id: hobbit.id 
+    },
+    {
+        body: "Awesome movie!",
+        author_id: joe.id,
+        video_id: lor.id 
+    },
+    {
+        body: "consequatur necessitatibus totam sed sit dolorum",
+        author_id: jane.id,
+        video_id: lor.id 
+    }
+])

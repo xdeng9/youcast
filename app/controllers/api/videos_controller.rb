@@ -8,9 +8,14 @@ class Api::VideosController < ApplicationController
 
     def show
         @video = Video.find_by(id: params[:id])
-        @video.view_count += 1
-        @video.save
-        render :show 
+
+        if @video
+            @video.view_count += 1
+            @video.save
+            render :show 
+        else
+            render json: ['video not found'], status: 401
+        end
     end
 
     def create
