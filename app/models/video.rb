@@ -22,4 +22,7 @@ class Video < ApplicationRecord
     foreign_key: :creator_id,
     class_name: :User 
 
+    has_many :comments,
+    foreign_key: :video_id,
+    class_name: :Comment 
 end
