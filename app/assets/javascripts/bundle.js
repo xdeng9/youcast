@@ -284,18 +284,22 @@ var createVideo = function createVideo(formData) {
   };
 };
 var updateVideo = function updateVideo(formData, videoId) {
-  return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["updateVideo"](formData, videoId).then(function (video) {
-    return dispatch(receiveVideo(video));
-  }, function (errors) {
-    return dispatch(receiveVideoErrors(errors.responseJSON));
-  });
+  return function (dispatch) {
+    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["updateVideo"](formData, videoId).then(function (video) {
+      return dispatch(receiveVideo(video));
+    }, function (errors) {
+      return dispatch(receiveVideoErrors(errors.responseJSON));
+    });
+  };
 };
 var deleteVideo = function deleteVideo(videoId) {
-  return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteVideo"](videoId).then(function () {
-    return dispatch(removeVideo(videoId));
-  }, function (errors) {
-    return dispatch(receiveVideoErrors(errors.responseJSON));
-  });
+  return function (dispatch) {
+    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteVideo"](videoId).then(function () {
+      return dispatch(removeVideo(videoId));
+    }, function (errors) {
+      return dispatch(receiveVideoErrors(errors.responseJSON));
+    });
+  };
 };
 
 /***/ }),
@@ -1201,10 +1205,10 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./frontend/components/video/video_edit.jsx":
-/*!**************************************************!*\
-  !*** ./frontend/components/video/video_edit.jsx ***!
-  \**************************************************/
+/***/ "./frontend/components/video/video_edit.js":
+/*!*************************************************!*\
+  !*** ./frontend/components/video/video_edit.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1316,7 +1320,8 @@ var VideoEdit = /*#__PURE__*/function (_Component) {
     key: "handleDelete",
     value: function handleDelete(e) {
       e.preventDefault();
-      this.props.deleteVideo(this.props.match.params.videoId); // this.props.history.push('/');
+      this.props.deleteVideo(this.props.match.params.videoId);
+      this.props.history.push('/');
     }
   }, {
     key: "handleUpdate",
@@ -1326,8 +1331,7 @@ var VideoEdit = /*#__PURE__*/function (_Component) {
       e.preventDefault();
       var _this$state = this.state,
           title = _this$state.title,
-          description = _this$state.description,
-          thumbnailFile = _this$state.thumbnailFile;
+          description = _this$state.description;
 
       if (title === '' || description === '') {
         this.setState({
@@ -1371,14 +1375,6 @@ var VideoEdit = /*#__PURE__*/function (_Component) {
       }
 
       return null;
-    }
-  }, {
-    key: "renderDeleteButton",
-    value: function renderDeleteButton() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "delete-btn",
-        onClick: this.handleDelete
-      }, "Delete");
     }
   }, {
     key: "renderUpdateButton",
@@ -1437,7 +1433,10 @@ var VideoEdit = /*#__PURE__*/function (_Component) {
         onChange: this.handleChange('description')
       }), this.renderVideoError(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "update-btn-container"
-      }, this.renderDeleteButton(), this.renderUpdateButton()))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "delete-btn",
+        onClick: this.handleDelete
+      }, "Delete"), this.renderUpdateButton()))));
     }
   }]);
 
@@ -1458,8 +1457,8 @@ var VideoEdit = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _video_edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./video_edit */ "./frontend/components/video/video_edit.jsx");
-/* harmony import */ var _actions_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video */ "./frontend/actions/video.js");
+/* harmony import */ var _actions_video__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/video */ "./frontend/actions/video.js");
+/* harmony import */ var _video_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./video_edit */ "./frontend/components/video/video_edit.js");
 
 
 
@@ -1475,18 +1474,18 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchVideo: function fetchVideo(videoId) {
-      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["fetchVideo"])(videoId));
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_1__["fetchVideo"])(videoId));
     },
     deleteVideo: function deleteVideo(videoId) {
-      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["deleteVideo"])(videoId));
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_1__["deleteVideo"])(videoId));
     },
     updateVideo: function updateVideo(formData, videoId) {
-      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_2__["updateVideo"])(formData, videoId));
+      return dispatch(Object(_actions_video__WEBPACK_IMPORTED_MODULE_1__["updateVideo"])(formData, videoId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_video_edit__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_video_edit__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 

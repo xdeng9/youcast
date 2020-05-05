@@ -15,7 +15,7 @@ class VideoEdit extends Component {
             error: '',
             creator: ''
         }
-        
+
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleThumbnailUpload = this.handleThumbnailUpload(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -28,7 +28,7 @@ class VideoEdit extends Component {
                     title: obj.video.title,
                     description: obj.video.description,
                     thumbnail: obj.video.thumbnail,
-                    creator: obj.video.creator 
+                    creator: obj.video.creator
                 })
             })
     }
@@ -59,22 +59,22 @@ class VideoEdit extends Component {
     handleDelete(e) {
         e.preventDefault();
         this.props.deleteVideo(this.props.match.params.videoId);
-        // this.props.history.push('/');
+        this.props.history.push('/');
     }
 
     handleUpdate(e) {
         e.preventDefault();
-        const { title, description, thumbnailFile } = this.state;
+        const { title, description } = this.state;
         if (title === '' || description === '') {
             this.setState({ error: "Required field can't be blank" })
             return;
-        } 
+        }
 
         const formData = new FormData();
         formData.append('video[title]', this.state.title);
         formData.append('video[description]', this.state.description);
         if (this.state.thumbnailFile) formData.append('video[thumbnail]', this.state.thumbnailFile);
-        
+
         this.setState({ loading: true });
         this.props.updateVideo(formData, this.props.match.params.videoId).then(obj => {
             this.props.history.push(`/watch/${obj.video.id}`)
@@ -105,12 +105,6 @@ class VideoEdit extends Component {
         return null;
     }
 
-    renderDeleteButton() {
-        return (
-            <button className="delete-btn" onClick={this.handleDelete}>Delete</button>
-        )
-    }
-
     renderUpdateButton() {
         if (!this.state.loading) {
             return (
@@ -118,9 +112,9 @@ class VideoEdit extends Component {
             )
         } else {
             return (
-                    <div className="loader-container">
-                        <div className="loader"></div>
-                    </div>
+                <div className="loader-container">
+                    <div className="loader"></div>
+                </div>
             )
         }
     }
@@ -149,19 +143,19 @@ class VideoEdit extends Component {
                                 <img src={this.state.thumbnail}></img>
                             </div>
                         </div>
-                        <input 
-                            className="upload-title-field" 
-                            placeholder="Title (required)" 
+                        <input
+                            className="upload-title-field"
+                            placeholder="Title (required)"
                             value={this.state.title}
                             onChange={this.handleChange('title')} />
-                        <textarea 
-                            className="upload-description-field" 
-                            placeholder="Description (required)" 
+                        <textarea
+                            className="upload-description-field"
+                            placeholder="Description (required)"
                             value={this.state.description}
                             onChange={this.handleChange('description')}></textarea>
-                            {this.renderVideoError()}
+                        {this.renderVideoError()}
                         <div className="update-btn-container">
-                            {this.renderDeleteButton()}
+                            <button className="delete-btn" onClick={this.handleDelete}>Delete</button>
                             {this.renderUpdateButton()}
                         </div>
                     </div>

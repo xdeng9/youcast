@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import VideoEdit from './video_edit';
 import { updateVideo, deleteVideo, fetchVideo } from '../../actions/video';
+import VideoEdit from './video_edit';
 
 const mapStateToProps = (state, ownProps) => ({
     video: state.entities.videos[ownProps.match.params.videoId],

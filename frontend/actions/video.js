@@ -1,5 +1,8 @@
 import * as VideoApiUtil from '../util/video_api_util';
-import { RECEIVE_VIDEOS, RECEIVE_VIDEO, RECEIVE_VIDEO_ERRORS, REMOVE_VIDEO } from './action_constants';
+import { RECEIVE_VIDEOS, 
+        RECEIVE_VIDEO, 
+        RECEIVE_VIDEO_ERRORS, 
+        REMOVE_VIDEO } from './action_constants';
 
 const receiveVideos = videos => ({
     type: RECEIVE_VIDEOS,
@@ -12,8 +15,8 @@ const receiveVideo = video => ({
 })
 
 const removeVideo = videoId => ({
-    type: REMOVE_VIDEO,
-    videoId
+        type: REMOVE_VIDEO,
+        videoId
 })
 
 const receiveVideoErrors = errors => ({
@@ -33,10 +36,10 @@ export const createVideo = formData => dispatch => VideoApiUtil.createVideo(form
     .then(video => dispatch(receiveVideo(video)),
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));
 
-export const updateVideo = (formData, videoId) => VideoApiUtil.updateVideo(formData, videoId)
+export const updateVideo = (formData, videoId) => dispatch => VideoApiUtil.updateVideo(formData, videoId)
     .then(video => dispatch(receiveVideo(video)),
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));
 
-export const deleteVideo = videoId => VideoApiUtil.deleteVideo(videoId)
+export const deleteVideo = videoId => dispatch => VideoApiUtil.deleteVideo(videoId)
     .then(() => dispatch(removeVideo(videoId)),
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));
