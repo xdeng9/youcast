@@ -26,6 +26,9 @@ class CommentIndex extends React.Component {
         if (!this.props.currentUser) this.props.history.push('/login');
 
         if (this.state.body === '') return;
+        let commentField = document.getElementById("comment-input");
+        commentField.value = '';
+        this.setState({ body: '' })
         let video_id = this.props.match.params.videoId;
         this.props.createComment({ body: this.state.body, video_id })
     }
@@ -36,9 +39,10 @@ class CommentIndex extends React.Component {
                 <div className="comments-header">{this.props.comments.length} Comments</div>
                 <div className="add-comment-container">
                     <i className="fas fa-user-circle comment-user-icon"></i>
-                    <form className="comment-form">
+                    <form className="comment-form" onSubmit={this.handleComment}>
                         <input
                             className="comment-field"
+                            id="comment-input"
                             onChange={this.handleChange}
                             type="text"
                             placeholder="Add a public comment..." />
@@ -51,7 +55,11 @@ class CommentIndex extends React.Component {
                 </div>
                 <ul className="comments-list-container">
                     {this.props.comments.map((comment, idx) => {
-                        return <CommentIndexItem key={idx} comment={comment} />
+                        return <CommentIndexItem key={idx} 
+                        comment={comment} 
+                        user={this.props.currentUser}
+                        deleteComment={this.props.deleteComment}
+                        />
                     })}
                 </ul>
             </div>

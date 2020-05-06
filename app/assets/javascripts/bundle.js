@@ -940,6 +940,11 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       if (!this.props.currentUser) this.props.history.push('/login');
       if (this.state.body === '') return;
+      var commentField = document.getElementById("comment-input");
+      commentField.value = '';
+      this.setState({
+        body: ''
+      });
       var video_id = this.props.match.params.videoId;
       this.props.createComment({
         body: this.state.body,
@@ -949,6 +954,8 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comments-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -958,9 +965,11 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-user-circle comment-user-icon"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "comment-form"
+        className: "comment-form",
+        onSubmit: this.handleComment
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "comment-field",
+        id: "comment-input",
         onChange: this.handleChange,
         type: "text",
         placeholder: "Add a public comment..."
@@ -974,7 +983,9 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
       }, this.props.comments.map(function (comment, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: idx,
-          comment: comment
+          comment: comment,
+          user: _this2.props.currentUser,
+          deleteComment: _this2.props.deleteComment
         });
       })));
     }
@@ -1071,13 +1082,37 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(CommentIndexItem);
 
-  function CommentIndexItem() {
+  function CommentIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, CommentIndexItem);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(CommentIndexItem, [{
+    key: "handleDelete",
+    value: function handleDelete(e) {
+      e.preventDefault();
+      this.props.deleteComment(this.props.comment.id);
+    }
+  }, {
+    key: "renderDeleteBtn",
+    value: function renderDeleteBtn() {
+      if (this.props.user && this.props.comment) {
+        if (this.props.user.username === this.props.comment.author) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "delete-comment-btn",
+            onClick: this.handleDelete
+          }, "Delete");
+        }
+      }
+
+      return null;
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -1092,7 +1127,7 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "comment-username"
       }, this.props.comment.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "comment-doc"
-      }, this.props.comment.published)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.body)));
+      }, this.props.comment.published)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.body)), this.renderDeleteBtn());
     }
   }]);
 
