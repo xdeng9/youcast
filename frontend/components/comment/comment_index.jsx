@@ -23,6 +23,8 @@ class CommentIndex extends React.Component {
 
     handleComment(e) {
         e.preventDefault();
+        if (!this.props.currentUser) this.props.history.push('/login');
+
         if (this.state.body === '') return;
         let video_id = this.props.match.params.videoId;
         this.props.createComment({ body: this.state.body, video_id })

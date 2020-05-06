@@ -938,6 +938,7 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
     key: "handleComment",
     value: function handleComment(e) {
       e.preventDefault();
+      if (!this.props.currentUser) this.props.history.push('/login');
       if (this.state.body === '') return;
       var video_id = this.props.match.params.videoId;
       this.props.createComment({
