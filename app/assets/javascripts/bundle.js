@@ -927,6 +927,14 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchComments(this.props.match.params.videoId);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
+        this.props.fetchComments(this.props.match.params.videoId);
+        window.scrollTo(0, 0);
+      }
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       e.preventDefault();
@@ -1489,11 +1497,21 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
   _createClass(Sidebar, [{
     key: "render",
     value: function render() {
-      if (this.props.location.pathname.includes("/watch")) return null;
+      if (this.props.partial) return null;
+
+      if (this.props.location.pathname.includes("/watch")) {
+        return this.renderModalSB();
+      }
+
       var sidebarSize = this.props.partial ? 'partial-size' : 'full-size';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "".concat(sidebarSize)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, this.renderSidebarList());
+    }
+  }, {
+    key: "renderSidebarList",
+    value: function renderSidebarList() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "sidebar-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "sidebar-list-item home",
@@ -1518,11 +1536,61 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
         className: "fab fa-linkedin"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sbit"
-      }, "LinkedIn"))));
+      }, "LinkedIn")));
     }
   }, {
     key: "renderModalSB",
-    value: function renderModalSB() {}
+    value: function renderModalSB() {
+      var anime = this.props.partial ? 'slide-in' : 'slide-out wide';
+      var bg = this.props.partial ? '' : 'modal-container';
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "".concat(bg)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-sidebar-container ".concat(anime)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "nav-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.props.toggleSidebar
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-bars"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "logo"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.youcastLogo,
+        alt: "logo"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "divider"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-sidebar-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "sidebar-list-item home",
+        to: "/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-home-lg-alt"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sbit"
+      }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "sidebar-list-item",
+        href: "https://github.com/xdeng9",
+        target: "_blank"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-github"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sbit"
+      }, "Github")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "sidebar-list-item",
+        href: "http://linkedin.com/in/xideng",
+        target: "_blank"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-linkedin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sbit"
+      }, "LinkedIn")))));
+    }
   }]);
 
   return Sidebar;
@@ -1543,6 +1611,8 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidebar */ "./frontend/components/sidebar/sidebar.jsx");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/ui */ "./frontend/actions/ui.js");
+
 
 
 
@@ -1552,7 +1622,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    toggleSidebar: function toggleSidebar() {
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_2__["toggleSidebar"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1901,7 +1979,7 @@ var VideoIndex = /*#__PURE__*/function (_React$Component) {
         className: "main-content-videos"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "recomended"
-      }, "Recomended"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Recommended"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "videos-outer-wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "videos-container"
@@ -2054,8 +2132,9 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
-        this.props.fetchVideo(this.props.match.params.videoId);
-        window.location.reload();
+        this.props.fetchVideo(this.props.match.params.videoId); // window.location.reload();
+
+        window.scrollTo(0, 0);
       }
     }
   }, {
@@ -2092,6 +2171,7 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        key: video.videoUrl,
         className: "vid",
         controls: true,
         autoPlay: true,

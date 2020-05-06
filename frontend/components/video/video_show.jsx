@@ -17,7 +17,8 @@ class VideoShow extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
             this.props.fetchVideo(this.props.match.params.videoId);
-            window.location.reload();
+            // window.location.reload();
+            window.scrollTo(0, 0);
         }
     }
 
@@ -48,6 +49,7 @@ class VideoShow extends React.Component {
                 <div className="left-container">
                     <div className="video-container">
                         <video 
+                            key={video.videoUrl}
                             className="vid"
                             controls 
                             autoPlay

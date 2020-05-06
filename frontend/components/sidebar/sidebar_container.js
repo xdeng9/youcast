@@ -1,8 +1,13 @@
 import { connect } from 'react-redux';
 import Sidebar from './sidebar';
+import { toggleSidebar } from '../../actions/ui';
 
 const mapStateToProps = state => ({
     partial: state.ui.partial
 })
 
-export default connect(mapStateToProps, null)(Sidebar);
+const mapDispatchToProps = dispatch => ({
+    toggleSidebar: () => dispatch(toggleSidebar())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

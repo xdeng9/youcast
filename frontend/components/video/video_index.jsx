@@ -15,7 +15,7 @@ class VideoIndex extends React.Component {
         const { videos } = this.props
         return (
             <div className="main-content-videos"> 
-                <div className="recomended">Recomended</div>   
+                <div className="recomended">Recommended</div>   
                 <div className="videos-outer-wrapper">
                     <ul className="videos-container">
                         { videos.map(video => {

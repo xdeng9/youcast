@@ -1,0 +1,75 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.modal-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+    z-index: 2;
+    background-color: #fff;
+    margin-top: 0;
+}
+
+.sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: -40px;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.divider {
+    border-top: 1px solid lightgray;
+    width: 100%;
+}
+
+.modal-sidebar-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.wide {
+    width: 250px;
+}
+
+.slide-in {
+    margin-top: 0;
+    animation: hideSidebar 0.2s linear both;
+}
+
+.slide-out {
+    margin-top: 0;
+    animation: showSidebar 0.2s ease both;
+}
+
+@keyframes hideSidebar {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+@keyframes showSidebar {
+    from {
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}

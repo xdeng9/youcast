@@ -16,6 +16,13 @@ class CommentIndex extends React.Component {
         this.props.fetchComments(this.props.match.params.videoId);
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
+            this.props.fetchComments(this.props.match.params.videoId);
+            window.scrollTo(0, 0);
+        }
+    }
+
     handleChange(e) {
         e.preventDefault();
         this.setState({ body: e.currentTarget.value })
