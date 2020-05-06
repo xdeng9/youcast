@@ -1,10 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import CommentIndexItem from './comment_index_item';
 
 class CommentIndex extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = { body: '' }
+    }
+
+    componentDidMount() {
+        this.props.fetchComments(this.props.match.params.videoId);
     }
 
     render() {
@@ -23,9 +29,14 @@ class CommentIndex extends React.Component {
                 <div className="comment-submit-btn-container">
                     <button className="comment-submit-btn">Comment</button>
                 </div>
+                <ul className="comments-list-container">
+                    {this.props.comments.map((comment, idx) => {
+                        return <CommentIndexItem key={idx} comment={comment} />
+                    })}
+                </ul>
             </div>
         )
     }
 }
 
-export default CommentIndex;
+export default withRouter(CommentIndex);

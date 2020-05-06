@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { filterVideos } from '../../util/selectors';
-import CommentIndexContainer from '../comment/comment_index';
+import CommentIndexContainer from '../comment/comment_index_container';
 
 class VideoShow extends React.Component {
 
