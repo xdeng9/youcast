@@ -1572,13 +1572,10 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderModalSB",
     value: function renderModalSB() {
-      console.log("partial", this.props.partial);
       var anime = 'slide-out wide';
       if (this.state.hide) anime = 'slide-in';
-      console.log("anime", anime);
-      var bg = this.props.partial ? '' : 'modal-container';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "".concat(bg),
+        className: "modal-container",
         onClick: this.hideModalSB()
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-sidebar-container ".concat(anime)

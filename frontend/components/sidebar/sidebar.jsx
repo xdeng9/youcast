@@ -60,14 +60,10 @@ class Sidebar extends React.Component {
     }
 
     renderModalSB() {
-        console.log("partial", this.props.partial)
-        
         let anime = 'slide-out wide';
         if (this.state.hide) anime = 'slide-in';
-        console.log("anime", anime)
-        let bg = this.props.partial ? '' : 'modal-container'
         return (
-            <div className={`${bg}`} onClick={this.hideModalSB()}>
+            <div className="modal-container" onClick={this.hideModalSB()}>
                 <div className={`modal-sidebar-container ${anime}`}>
                     <div className="sidebar-top">
                         <div className="nav-left">
