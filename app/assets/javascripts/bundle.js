@@ -916,6 +916,8 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       body: ''
     };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleComment = _this.handleComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -925,13 +927,32 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchComments(this.props.match.params.videoId);
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      e.preventDefault();
+      this.setState({
+        body: e.currentTarget.value
+      });
+    }
+  }, {
+    key: "handleComment",
+    value: function handleComment(e) {
+      e.preventDefault();
+      if (this.state.body === '') return;
+      var video_id = this.props.match.params.videoId;
+      this.props.createComment({
+        body: this.state.body,
+        video_id: video_id
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comments-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comments-header"
-      }, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.comments.length, " Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-comment-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-user-circle comment-user-icon"
@@ -939,12 +960,14 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
         className: "comment-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "comment-field",
+        onChange: this.handleChange,
         type: "text",
         placeholder: "Add a public comment..."
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-submit-btn-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "comment-submit-btn"
+        className: "comment-submit-btn",
+        onClick: this.handleComment
       }, "Comment")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "comments-list-container"
       }, this.props.comments.map(function (comment, idx) {
@@ -1056,7 +1079,19 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(CommentIndexItem, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.body));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "comment-item-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-user-circle comment-user-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-details-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-user-date"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "comment-username"
+      }, this.props.comment.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "comment-doc"
+      }, this.props.comment.published)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.body)));
     }
   }]);
 
