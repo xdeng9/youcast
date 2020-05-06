@@ -38,7 +38,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 36px;
+}
+
+.modal-list-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 192px;
+    height: 40px;
+    padding: 0 24px;
+}
+
+.modal-list-item:hover {
+    background-color: #e2e8f0;
+}
+
+.modal-list-item .fas {
+    color: red;
+}
+
+.modal-icon {
+    margin-right: 24px;
 }
 
 .wide {
@@ -53,6 +74,10 @@
 .slide-out {
     margin-top: 0;
     animation: showSidebar 0.2s ease both;
+}
+
+.hamburger-btn:hover {
+    cursor: pointer;
 }
 
 @keyframes hideSidebar {

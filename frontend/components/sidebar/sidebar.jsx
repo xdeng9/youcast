@@ -3,8 +3,20 @@ import { Link, withRouter } from 'react-router-dom'
 
 class Sidebar extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.hideModalSB = this.hideModalSB.bind(this);
+        this.state = {
+            hide: false
+        }
+    }
+
+    componentDidMount() {
+        if (!this.props.partial) this.props.toggleSidebar();
+    }
+
     render() {
-        if (this.props.partial) return null;
+        if (this.props.partial && this.props.location.pathname.includes("/watch")) return null;
 
         if (this.props.location.pathname.includes("/watch")) {
             return this.renderModalSB();
@@ -37,15 +49,29 @@ class Sidebar extends React.Component {
         )
     }
 
+    hideModalSB() {
+        return () => {
+            this.setState({ hide: true });
+            setTimeout(() => {
+                this.setState({ hide: false });
+                this.props.toggleSidebar();
+            }, 230)
+        }
+    }
+
     renderModalSB() {
-        let anime = this.props.partial ? 'slide-in' : 'slide-out wide';
+        console.log("partial", this.props.partial)
+        
+        let anime = 'slide-out wide';
+        if (this.state.hide) anime = 'slide-in';
+        console.log("anime", anime)
         let bg = this.props.partial ? '' : 'modal-container'
         return (
-            <div className={`${bg}`}>
+            <div className={`${bg}`} onClick={this.hideModalSB()}>
                 <div className={`modal-sidebar-container ${anime}`}>
                     <div className="sidebar-top">
                         <div className="nav-left">
-                            <button onClick={this.props.toggleSidebar}><i className="far fa-bars"></i></button>
+                            <div className="hamburger-btn"><i className="far fa-bars"></i></div>
                             <div className="logo">
                                 <Link to="/">
                                     <img src={window.youcastLogo} alt="logo" />
@@ -55,16 +81,16 @@ class Sidebar extends React.Component {
                     </div>
                     <div className="divider"></div>
                     <div className="modal-sidebar-list">
-                        <Link className="sidebar-list-item home" to="/">
-                            <i className="fas fa-home-lg-alt"></i>
+                        <Link className="modal-list-item home" to="/">
+                            <i className="fas fa-home-lg-alt modal-icon"></i>
                             <span className="sbit">Home</span>
                         </Link>
-                        <a className="sidebar-list-item" href="https://github.com/xdeng9" target="_blank">
-                            <i className="fab fa-github"></i>
+                        <a className="modal-list-item" href="https://github.com/xdeng9" target="_blank">
+                            <i className="fab fa-github modal-icon"></i>
                             <span className="sbit">Github</span>
                         </a>
-                        <a className="sidebar-list-item" href="http://linkedin.com/in/xideng" target="_blank">
-                            <i className="fab fa-linkedin"></i>
+                        <a className="modal-list-item" href="http://linkedin.com/in/xideng" target="_blank">
+                            <i className="fab fa-linkedin modal-icon"></i>
                             <span className="sbit">LinkedIn</span>
                         </a>
                     </div>

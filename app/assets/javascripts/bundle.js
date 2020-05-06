@@ -1488,16 +1488,28 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Sidebar);
 
-  function Sidebar() {
+  function Sidebar(props) {
+    var _this;
+
     _classCallCheck(this, Sidebar);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.hideModalSB = _this.hideModalSB.bind(_assertThisInitialized(_this));
+    _this.state = {
+      hide: false
+    };
+    return _this;
   }
 
   _createClass(Sidebar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (!this.props.partial) this.props.toggleSidebar();
+    }
+  }, {
     key: "render",
     value: function render() {
-      if (this.props.partial) return null;
+      if (this.props.partial && this.props.location.pathname.includes("/watch")) return null;
 
       if (this.props.location.pathname.includes("/watch")) {
         return this.renderModalSB();
@@ -1539,20 +1551,43 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
       }, "LinkedIn")));
     }
   }, {
+    key: "hideModalSB",
+    value: function hideModalSB() {
+      var _this2 = this;
+
+      return function () {
+        _this2.setState({
+          hide: true
+        });
+
+        setTimeout(function () {
+          _this2.setState({
+            hide: false
+          });
+
+          _this2.props.toggleSidebar();
+        }, 230);
+      };
+    }
+  }, {
     key: "renderModalSB",
     value: function renderModalSB() {
-      var anime = this.props.partial ? 'slide-in' : 'slide-out wide';
+      console.log("partial", this.props.partial);
+      var anime = 'slide-out wide';
+      if (this.state.hide) anime = 'slide-in';
+      console.log("anime", anime);
       var bg = this.props.partial ? '' : 'modal-container';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "".concat(bg)
+        className: "".concat(bg),
+        onClick: this.hideModalSB()
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-sidebar-container ".concat(anime)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-top"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "nav-left"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.props.toggleSidebar
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hamburger-btn"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-bars"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1567,26 +1602,26 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-sidebar-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "sidebar-list-item home",
+        className: "modal-list-item home",
         to: "/"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-home-lg-alt"
+        className: "fas fa-home-lg-alt modal-icon"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sbit"
       }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "sidebar-list-item",
+        className: "modal-list-item",
         href: "https://github.com/xdeng9",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fab fa-github"
+        className: "fab fa-github modal-icon"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sbit"
       }, "Github")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "sidebar-list-item",
+        className: "modal-list-item",
         href: "http://linkedin.com/in/xideng",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fab fa-linkedin"
+        className: "fab fa-linkedin modal-icon"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sbit"
       }, "LinkedIn")))));
