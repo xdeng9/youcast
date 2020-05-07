@@ -24,6 +24,9 @@ const receiveVideoErrors = errors => ({
     errors 
 })
 
+export const searchVideos = query => dispatch => VideoApiUtil.searchVideos(query)
+    .then(videos => dispatch(receiveVideos(videos)));
+
 export const fetchVideos = () => dispatch => VideoApiUtil.fetchVideos()
     .then(videos => dispatch(receiveVideos(videos)),
         errors => dispatch(receiveVideoErrors(errors.responseJSON)));

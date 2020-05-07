@@ -7,6 +7,7 @@ import SidebarContainer from './sidebar/sidebar_container';
 import VideoShowContainer from './video/video_show_container';
 import VideoUploadContainer from './video/video_upload_container';
 import VideoEditContainer from './video/video_edit_container';
+import SearchResult from './search/search_result';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                 <SidebarContainer />
                 <Switch>
                     <Route exact path="/" component={VideoIndexContainer} />
+                    <Route exact path="/search/:query" component={SearchResult} />
                     <Route path="/watch/:videoId" component={VideoShowContainer} />
                     <ProtectedRoute exact path="/upload" component={VideoUploadContainer} />
                     <ProtectedRoute exact path="/edit/:videoId" component={VideoEditContainer}/>

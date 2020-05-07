@@ -1,3 +1,10 @@
+export const searchVideos = query => {
+    return $.ajax({
+        url: `api/search/${query}`,
+        metho: 'GET'
+    })
+}
+
 export const fetchVideos = () => {
     return $.ajax({
         url: 'api/videos',

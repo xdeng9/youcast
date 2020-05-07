@@ -49,6 +49,12 @@ class Api::VideosController < ApplicationController
         end
     end
 
+    def search
+        query = params[:query]
+        @videos = Video.where("lower(title) LIKE ?", "%#{query.downcase}%")
+        render :index
+    end
+
     private
     def video_params
         params.require(:video).permit(:title, :description, :thumbnail, :video)

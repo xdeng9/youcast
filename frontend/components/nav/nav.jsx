@@ -1,29 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SearchIndex from '../search/search_index';
 
 class Nav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
             dropdown: false
         };
         this.hideDropDown = this.hideDropDown.bind(this);
         this.showDropdown = this.showDropdown.bind(this);
-        this.processQuery = this.processQuery.bind(this);
-    }
-
-    handleUpdate() {
-        return (e) => {
-            e.preventDefault();
-            this.setState({ search: e.target.value })
-        }
-    }
-
-    processQuery(e) {
-        e.preventDefault();
-        //TBD
     }
 
     showDropdown(e) {
@@ -84,24 +71,6 @@ class Nav extends Component {
         )
     }
 
-    renderSearchBar() {
-        return (
-            <div className="search-bar-container">
-                <form className="search-bar" onSubmit={this.processQuery}>
-                    <input
-                    onChange={this.handleUpdate()}
-                    className="search-field" 
-                    type="text" 
-                    placeholder="Search" 
-                    value={this.state.search} />
-                    <button className="search-btn">
-                        <i className="far fa-search"></i>
-                    </button>
-                </form>
-            </div>
-        )
-    }
-
     render() {
         const leftDisplay = (
             <div className="nav-left">
@@ -113,8 +82,6 @@ class Nav extends Component {
                 </div>
             </div>
         )
-
-        const centerDisplay = this.renderSearchBar();
 
         const authDisplay = this.props.currentUser ? (
             <button onClick={this.showDropdown}>{this.renderUserLogo()}</button>
@@ -135,7 +102,7 @@ class Nav extends Component {
         return (
             <div className="nav-bar">
                 {leftDisplay}
-                {centerDisplay}
+                <SearchIndex />
                 {rightDisplay}
             </div>
         )

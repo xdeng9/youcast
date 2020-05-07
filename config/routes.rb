@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :update, :destroy]
 
     get '/verify_email', to: 'users#valid_email?'
+    get '/search/:query', to: 'videos#search'
   end
   root 'static_pages#root'
 end
