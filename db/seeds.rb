@@ -9,6 +9,7 @@ require 'open-uri'
 User.destroy_all
 Video.destroy_all
 Comment.destroy_all
+Like.destroy_all
 
 User.create([
     {
@@ -204,5 +205,50 @@ Comment.create([
         body: "consequatur necessitatibus totam sed sit dolorum",
         author_id: jane.id,
         video_id: lor.id 
+    }
+])
+
+Like.create([
+    {
+        status: 1,
+        user_id: joe.id,
+        likeable_id: lor.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: 1,
+        user_id: demo.id,
+        likeable_id: lor.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: 1,
+        user_id: john.id,
+        likeable_id: lor.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: 1,
+        user_id: jane.id,
+        likeable_id: lor.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: 1,
+        user_id: joe.id,
+        likeable_id: youtube.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: -1,
+        user_id: demo.id,
+        likeable_id: sw3.id,
+        likeable_type: 'Video'
+    },
+    {
+        status: 1,
+        user_id: demo.id,
+        likeable_id: lor3.id,
+        likeable_type: 'Video'
     }
 ])
