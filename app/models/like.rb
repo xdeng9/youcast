@@ -12,6 +12,7 @@
 #
 class Like < ApplicationRecord
     validates :likeable_type, inclusion: { in: ['Video', 'Comment'] }
+    validates :user_id, uniqueness: { scope: [:likeable_id, :likeable_type] }
     validates :user_id, :status, :likeable_id, :likeable_type, presence: true 
 
     belongs_to :likeable, polymorphic: true 

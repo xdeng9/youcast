@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { filterVideos } from '../../util/selectors';
 import CommentIndexContainer from '../comment/comment_index_container';
+import LikeContainer from '../like/like_container';
 
 class VideoShow extends React.Component {
 
@@ -63,14 +64,7 @@ class VideoShow extends React.Component {
                             <div className="details-views-date">
                                 <p>{video.view_count} views <span>&#5867;</span> {video.doc}</p>
                             </div>
-                            <div className="details-likes hover">
-                                <div className="thumb-up">
-                                    <i className="fas fa-thumbs-up"></i>
-                                </div>
-                                <div className="thumb-down">
-                                    <i className="fas fa-thumbs-down"></i>
-                                </div>
-                            </div>
+                            <LikeContainer />
                         </div>
                     </div> 
                     <div className="show-video-user-box">

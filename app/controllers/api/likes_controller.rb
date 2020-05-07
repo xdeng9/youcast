@@ -18,7 +18,7 @@ class Api::LikesController < ApplicationController
 
     def update
         @like = Like.find_by(id: params[:id])
-        if @like.update 
+        if @like.update(like_params)
             render :show 
         else
             render json: ['Unable to process this operation'], status: 401

@@ -198,6 +198,76 @@ var deleteComment = function deleteComment(commentId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/like.js":
+/*!**********************************!*\
+  !*** ./frontend/actions/like.js ***!
+  \**********************************/
+/*! exports provided: fetchLikes, createLike, updateLike, deleteLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateLike", function() { return updateLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteLike", function() { return deleteLike; });
+/* harmony import */ var _action_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./action_constants */ "./frontend/actions/action_constants.js");
+/* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/like_api_util */ "./frontend/util/like_api_util.js");
+
+
+
+var receiveLikes = function receiveLikes(likes) {
+  return {
+    type: _action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKES"],
+    likes: likes
+  };
+};
+
+var receiveLike = function receiveLike(like) {
+  return {
+    type: _action_constants__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKE"],
+    like: like
+  };
+};
+
+var removeLike = function removeLike(likeId) {
+  return {
+    type: _action_constants__WEBPACK_IMPORTED_MODULE_0__["REMOVE_LIKE"],
+    likeId: likeId
+  };
+};
+
+var fetchLikes = function fetchLikes(videoId) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_1__["fetchLikes"](videoId).then(function (likes) {
+      return dispatch(receiveLikes(likes));
+    });
+  };
+};
+var createLike = function createLike(like) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_1__["createLike"](like).then(function (like) {
+      return dispatch(receiveLike(like));
+    });
+  };
+};
+var updateLike = function updateLike(likeId, like) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_1__["updateLike"](likeId, like).then(function (like) {
+      return dispatch(receiveLike(like));
+    });
+  };
+};
+var deleteLike = function deleteLike(likeId) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_1__["deleteLike"](likeId).then(function (like) {
+      return dispatch(removeLike(likeId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session.js":
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
@@ -937,7 +1007,6 @@ var CommentIndex = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
         this.props.fetchComments(this.props.match.params.videoId);
-        window.scrollTo(0, 0);
       }
     }
   }, {
@@ -1149,6 +1218,212 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (CommentIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/like/like.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/like/like.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Like = /*#__PURE__*/function (_React$Component) {
+  _inherits(Like, _React$Component);
+
+  var _super = _createSuper(Like);
+
+  function Like() {
+    _classCallCheck(this, Like);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(Like, [{
+    key: "handleLike",
+    value: function handleLike(e, likeId, likeColor, dislikeColor) {
+      e.preventDefault();
+      if (!this.props.currentUser) this.props.history.push('/login');
+
+      if (!likeId && likeColor === '' && dislikeColor === '') {
+        this.props.createLike({
+          status: 1,
+          likeable_type: 'Video',
+          likeable_id: this.props.match.params.videoId
+        });
+      } else if (likeId && dislikeColor === '') {
+        this.props.deleteLike(likeId);
+      } else if (likeId && likeColor === '') {
+        this.props.updateLike(likeId, {
+          status: 1
+        });
+      }
+    }
+  }, {
+    key: "handleDislike",
+    value: function handleDislike(e, likeId, likeColor, dislikeColor) {
+      e.preventDefault();
+      if (!this.props.currentUser) this.props.history.push('/login');
+
+      if (!likeId && likeColor === '' && dislikeColor === '') {
+        this.props.createLike({
+          status: -1,
+          likeable_type: 'Video',
+          likeable_id: this.props.match.params.videoId
+        });
+      } else if (likeId && dislikeColor === '') {
+        this.props.updateLike(likeId, {
+          status: -1
+        });
+      } else if (likeId && likeColor === '') {
+        this.props.deleteLike(likeId);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchLikes(this.props.match.params.videoId);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
+        this.props.fetchLikes(this.props.match.params.videoId);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var likeCount = 0;
+      var dislikeCount = 0;
+      var likeColor = '';
+      var dislikeColor = '';
+      var likeId = null;
+      var userId = this.props.currentUser ? this.props.currentUser.id : null;
+
+      for (var i = 0; i < this.props.likes.length; i++) {
+        if (this.props.likes[i].status === 1) {
+          likeCount++;
+
+          if (userId === this.props.likes[i].user_id) {
+            likeColor = 'high-light';
+            likeId = this.props.likes[i].id;
+          }
+        } else if (this.props.likes[i].status === -1) {
+          if (userId === this.props.likes[i].user_id) {
+            dislikeColor = 'high-light';
+            likeId = this.props.likes[i].id;
+          }
+
+          dislikeCount++;
+        }
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "details-likes"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "thumb-up"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-thumbs-up hover ".concat(likeColor),
+        onClick: function onClick(e) {
+          return _this.handleLike(e, likeId, likeColor, dislikeColor);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "like-counter"
+      }, likeCount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "thumb-down"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-thumbs-down hover ".concat(dislikeColor),
+        id: "down-vote",
+        onClick: function onClick(e) {
+          return _this.handleDislike(e, likeId, likeColor, dislikeColor);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dislike-counter"
+      }, dislikeCount)));
+    }
+  }]);
+
+  return Like;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Like));
+
+/***/ }),
+
+/***/ "./frontend/components/like/like_container.js":
+/*!****************************************************!*\
+  !*** ./frontend/components/like/like_container.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _like__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./like */ "./frontend/components/like/like.jsx");
+/* harmony import */ var _actions_like__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/like */ "./frontend/actions/like.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.entities.users[state.session.id],
+    likes: Object.values(state.entities.likes)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchLikes: function fetchLikes(videoId) {
+      return dispatch(Object(_actions_like__WEBPACK_IMPORTED_MODULE_2__["fetchLikes"])(videoId));
+    },
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like__WEBPACK_IMPORTED_MODULE_2__["createLike"])(like));
+    },
+    updateLike: function updateLike(likeId, like) {
+      return dispatch(Object(_actions_like__WEBPACK_IMPORTED_MODULE_2__["updateLike"])(likeId, like));
+    },
+    deleteLike: function deleteLike(likeId) {
+      return dispatch(Object(_actions_like__WEBPACK_IMPORTED_MODULE_2__["deleteLike"])(likeId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_like__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -2122,6 +2397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _util_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/selectors */ "./frontend/util/selectors.js");
 /* harmony import */ var _comment_comment_index_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../comment/comment_index_container */ "./frontend/components/comment/comment_index_container.js");
+/* harmony import */ var _like_like_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../like/like_container */ "./frontend/components/like/like_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2143,6 +2419,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2225,17 +2502,7 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         className: "view-date-like"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "details-views-date"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.view_count, " views ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u16EB"), " ", video.doc)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "details-likes hover"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "thumb-up"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-thumbs-up"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "thumb-down"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-thumbs-down"
-      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, video.view_count, " views ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u16EB"), " ", video.doc)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_like_like_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "show-video-user-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-box"
@@ -3135,6 +3402,51 @@ var updateComment = function updateComment(commentId, comment) {
 var deleteComment = function deleteComment(commentId) {
   return $.ajax({
     url: "api/comments/".concat(commentId),
+    method: 'DELETE'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/like_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/like_api_util.js ***!
+  \****************************************/
+/*! exports provided: fetchLikes, createLike, updateLike, deleteLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateLike", function() { return updateLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteLike", function() { return deleteLike; });
+var fetchLikes = function fetchLikes(videoId) {
+  return $.ajax({
+    url: "api/videos/".concat(videoId, "/likes")
+  });
+};
+var createLike = function createLike(like) {
+  return $.ajax({
+    url: 'api/likes',
+    method: 'POST',
+    data: {
+      like: like
+    }
+  });
+};
+var updateLike = function updateLike(likeId, like) {
+  return $.ajax({
+    url: "api/likes/".concat(likeId),
+    method: 'PATCH',
+    data: {
+      like: like
+    }
+  });
+};
+var deleteLike = function deleteLike(likeId) {
+  return $.ajax({
+    url: "api/likes/".concat(likeId),
     method: 'DELETE'
   });
 };

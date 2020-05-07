@@ -105,7 +105,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 30px;
 }
 
 .details-views-date {
@@ -119,12 +119,30 @@
     display: flex;
     width: 280px;
     justify-content: center;
+    align-items: center;
+    color: gray;
 }
 
 .thumb-up {
-    margin-right: 80px;
+    margin-right: 50px;
 }
 
+.like-counter {
+    padding-left: 10px;
+}
+
+.dislike-counter {
+    padding-left: 10px;
+}
+
+.high-light {
+    color: #1c5fdb;
+}
+
+#down-vote {
+    padding-top: 2px;
+}
+ 
 .hover {
     cursor: pointer;
 }
