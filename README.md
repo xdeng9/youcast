@@ -15,7 +15,7 @@ YouCast is a clone of the popular video sharing site YouTube. This web app allow
 * New account creation, login, and guest/demo login.
   * Users can sign up, sign in, log out.
   * Users can use a demo login to try the site.
-   <img src="https://github.com/xdeng9/youcast/blob/master/img/sign-up.png" width="600px"/>
+   <img src="https://github.com/xdeng9/youcast/blob/master/img/sign-up.png" width="500px"/>
 
 
 * Home page displays a list of recommended videos.
