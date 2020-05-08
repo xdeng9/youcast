@@ -26,12 +26,13 @@ YouCast is a clone of the popular video sharing site YouTube. This web app allow
 
 * Each video displays information such as title, description, creator username, number of views, published date, and number of likes/dislikes.
   * Logged in users can give a video a thumbup or thumbdown.
-<img src="https://github.com/xdeng9/youcast/blob/master/img/video-show.png"/>
+<img src="https://github.com/xdeng9/youcast/blob/master/img/video-show.png" />
   
   
 * Logged in users can write and delete comments under a video.
 * Users can easily navigate through the site by using the navigation sidebar.
 * Users can search for videos.
+<img src="https://github.com/xdeng9/youcast/blob/master/img/search.png" />
 
 ## Future Features
 * Channels/Subscriptions
