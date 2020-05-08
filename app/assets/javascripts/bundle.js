@@ -2831,7 +2831,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     video: state.entities.videos[ownProps.match.params.videoId],
     currentUser: state.entities.users[state.session.id],
-    videoList: Object(_util_selectors__WEBPACK_IMPORTED_MODULE_2__["shuffleVideos"])(Object.values(state.entities.videos)).slice(0, 10)
+    videoList: Object.values(state.entities.videos).slice(0, 10)
   };
 };
 
