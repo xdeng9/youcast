@@ -12,9 +12,9 @@ YouCast is a clone of the popular video sharing site YouTube. This web app allow
 
 
 ## Core Features
-* New account creation, login, and guest/demo login
-  * Users can sign up, sign in, log out
-  * Users can use a demo login to try the site
+* New account creation, login, and guest/demo login.
+  * Users can sign up, sign in, log out.
+  * Users can use a demo login to try the site.
 * Home page displays a list of recommended videos.
 * Logged in users can upload, edit, and delete videos.
 * Each video displays information such as title, description, creator username, number of views, published date, and number of likes/dislikes.
