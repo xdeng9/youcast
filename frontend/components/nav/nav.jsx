@@ -54,7 +54,7 @@ class Nav extends Component {
                     </div>
                 </div>
                 <div className="dropdown-links">
-                    <a className="link-item" href="https://github.com/xdeng9" target="_blank">
+                    <a className="link-item" href="https://github.com/xdeng9/youcast" target="_blank">
                         <i className="fab fa-github"></i>
                         Github
                     </a>

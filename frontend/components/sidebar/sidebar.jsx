@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                     <i className="fas fa-home-lg-alt"></i>
                     <span className="sbit">Home</span>
                 </Link>
-                <a className="sidebar-list-item" href="https://github.com/xdeng9" target="_blank">
+                <a className="sidebar-list-item" href="https://github.com/xdeng9/youcast" target="_blank">
                     <i className="fab fa-github"></i>
                     <span className="sbit">Github</span>
                 </a>
@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
                             <i className="fas fa-home-lg-alt modal-icon"></i>
                             <span className="sbit">Home</span>
                         </Link>
-                        <a className="modal-list-item" href="https://github.com/xdeng9" target="_blank">
+                        <a className="modal-list-item" href="https://github.com/xdeng9/youcast" target="_blank">
                             <i className="fab fa-github modal-icon"></i>
                             <span className="sbit">Github</span>
                         </a>

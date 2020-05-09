@@ -1550,7 +1550,7 @@ var Nav = /*#__PURE__*/function (_Component) {
         className: "dropdown-links"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "link-item",
-        href: "https://github.com/xdeng9",
+        href: "https://github.com/xdeng9/youcast",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github"
@@ -2059,7 +2059,7 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
         className: "sbit"
       }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "sidebar-list-item",
-        href: "https://github.com/xdeng9",
+        href: "https://github.com/xdeng9/youcast",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github"
@@ -2132,7 +2132,7 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
         className: "sbit"
       }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "modal-list-item",
-        href: "https://github.com/xdeng9",
+        href: "https://github.com/xdeng9/youcast",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github modal-icon"
