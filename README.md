@@ -6,7 +6,7 @@ YouCast is a clone of the popular video sharing site YouTube. This web app allow
 
 ## Technologies
 
-* This site is built with React, Redux, and Javascript for the frontend.
+* This site is built with React, Redux, and JavaScript for the frontend.
 * The backend of this app is built with Ruby on Rails.
 * I used Amazon S3 web service as the storage for video files, and video thumbnails. Everything else was stored on PostgreSQL.
 
