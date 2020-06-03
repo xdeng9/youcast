@@ -34,6 +34,20 @@ YouCast is a clone of the popular video sharing site YouTube. This web app allow
 * Users can search for videos.
 <img src="https://github.com/xdeng9/youcast/blob/master/img/search.png" />
 
+
+## Polymorphic association
+```ruby
+validates :likeable_type, inclusion: { in: ['Video', 'Comment'] }
+    validates :user_id, uniqueness: { scope: [:likeable_id, :likeable_type] }
+    validates :user_id, :status, :likeable_id, :likeable_type, presence: true 
+
+    belongs_to :likeable, polymorphic: true 
+
+    belongs_to :user,
+    foreign_key: :user_id,
+    class_name: :User 
+```
+
 ## Future Features
 * Channels/Subscriptions
 * Reply to comments
