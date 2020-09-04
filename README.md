@@ -53,3 +53,6 @@ validates :likeable_type, inclusion: { in: ['Video', 'Comment'] }
 * Reply to comments
 * Like/dislike comments
 * User profile page
+
+## Credit
+- [Font Awesome https://fontawesome.com/license](https://fontawesome.com/license)
